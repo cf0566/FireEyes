@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.edu.fireeyes"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name="com.edu.fireeyes.base.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        <activity
+            android:name="com.edu.fireeyes.activity.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.edu.fireeyes.activity.LoginActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="com.edu.fireeyes.activity.RegistActivity"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.SetPersonalInformationActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.AdviceActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.SocialCompanyActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.SocialCompanyDetailsActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.HistoryTaskActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.HistoryAdviceActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NewBuildGeneralActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInformActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NewBuildAddPeopleActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.CheckCreatedActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.DivideTaskActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.WaitQueryTaskActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NormalExampleActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.UsingExplainActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.SaveFileActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.AddBookCheckActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NewBuildIndustryActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.AddAreaCheckActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.AddImportCheckActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInform2Activity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.PicturePreviewActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NormalExampleItemActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.WaitTaskQueryClickActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.NewBuildTaskActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.WaitTaskClickListViewClickActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.RemarkActivity"></activity>
+    </application>
+
+</manifest>

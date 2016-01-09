@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FireEyes</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+	<string name="download_failed">下载失败</string>
+	<string name="test">测试</string>
+	<string name="clear">清除图片</string>
+
+</resources>
