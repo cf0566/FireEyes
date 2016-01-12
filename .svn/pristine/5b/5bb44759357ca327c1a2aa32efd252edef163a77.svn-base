@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_normal_example_item_drawerlayout"
@@ -81,4 +82,89 @@
         </ListView>
     </RelativeLayout>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_normal_example_item_drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/activity_normal_example_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/activity_normal_example_item_action"
+            style="@style/title_style"
+            android:gravity="center_vertical" >
+
+            <ImageView
+                android:id="@+id/activity_normal_example_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:src="@android:drawable/ic_menu_help" />
+
+            <TextView
+                android:id="@+id/activity_normal_example_tv_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="标准规范"
+                android:textColor="#FFF"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/activity_normal_example_item_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_normal_example_item_action"
+            android:layout_margin="15dp"
+            android:text="总则"
+            android:textColor="#307EAC"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/activity_normal_example_item_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/activity_normal_example_item_tv_name"
+            android:layout_margin="15dp"
+            android:text="内容"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/activity_normal_example_item_menu"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="#33ff0000"
+        android:clickable="true" >
+
+        <TextView
+            android:id="@+id/activity_normal_example_item_menu_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="一、建筑设计防火规范"
+            android:textColor="#FFF"
+            android:textSize="18sp" />
+
+        <ListView
+            android:id="@+id/activity_normal_example_item_menu_lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/activity_normal_example_item_menu_tv_title" >
+        </ListView>
+    </RelativeLayout>
+
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
 </android.support.v4.widget.DrawerLayout>

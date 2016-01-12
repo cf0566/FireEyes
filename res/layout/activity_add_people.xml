@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -67,3 +68,74 @@
      
 
 </LinearLayout>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical" >
+     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0E88D5"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/activity_add_people_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="添加组员"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/activity_add_people_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
+        <TextView
+            android:id="@+id/activity_add_people_tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="保存"
+            android:textSize="15sp"
+            android:textColor="#FFF"
+          />
+        
+    </RelativeLayout>
+    <LinearLayout 
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="#F7F7F7"
+		android:padding="10dp"
+        >
+        <EditText 
+            android:id="@+id/activity_add_people_et_peoplename"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/ic_menu_help"
+            style="@style/my_edittext_style"
+            android:hint="请输入搜索内容"
+            />
+        
+    </LinearLayout>
+     <ListView 
+         android:id="@+id/activity_add_people_lv_people"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:background="#FFFFFF"
+         ></ListView>
+     
+
+</LinearLayout>
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3

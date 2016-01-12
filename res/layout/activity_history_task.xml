@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -244,4 +245,251 @@
         </LinearLayout>
     </ScrollView>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/title_style"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/activity_history_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/activity_history_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="任务名称"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/activity_history_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="分享"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EDEDED"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/activity_history_tv_divide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="8dp"
+                android:text="行业分类:体育馆" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:background="#FFF"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="评估得分" />
+
+                <SeekBar
+                    android:id="@+id/activity_history_sbar_score"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:max="100"
+                    android:layout_weight="1"
+                    android:maxHeight="10dp"
+                    android:minHeight="10dp"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
+                    android:progressDrawable="@drawable/po_seekbar"
+                    android:thumb="@drawable/seekbar_thumb" 
+                    android:thumbOffset="0dp"
+                    />
+                <TextView 
+                     android:id="@+id/activity_history_tv_score"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="50"
+                     android:gravity="center_vertical"
+                     android:layout_marginRight="10dp"
+                    />
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="#59BFFF" >
+
+                <LinearLayout 
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="风险等级" />
+
+                <TextView
+                    android:id="@+id/activity_history_tv_grade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:background="#F00"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="1级 低风险"
+                    android:textColor="#FFF" />
+                </LinearLayout>
+                 <TextView
+                android:id="@+id/activity_history_tv_grade_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="该建筑各项结构措施完善，发生火灾的几率很小"
+                android:layout_marginTop="8dp"
+                android:textColor="#FFF"
+                android:textSize="12sp" />
+                
+            </LinearLayout>
+
+           
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="行业对比" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_compare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="8dp"
+                android:text="行业平均分77.7500，高于行业平均5.25000"
+                android:drawableRight="@drawable/shangsheng"
+                android:gravity="center_vertical"
+                android:textColor="#737373"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="自身风险变化趋势" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:padding="8dp"
+                android:text="2015-12-13"
+                android:textColor="#737373"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_advice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableRight="@drawable/go5"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="查看不合格项及建议" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="#D3D3D3" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:drawableRight="@drawable/go5"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="各检查细项结果 " />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="#D3D3D3" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_example"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+               android:drawableRight="@drawable/go5"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="生成模板 " />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.3dp"
+                android:background="#D3D3D3" />
+
+            <TextView
+                android:id="@+id/activity_history_tv_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:text="评估报告下载 " />
+
+            <TextView
+                android:id="@+id/activity_history_tv_report_download"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFF"
+                android:drawableRight="@drawable/xiazhai"
+                android:gravity="center_vertical"
+                android:padding="8dp"
+                android:text="任务名称"
+                android:textColor="#737373"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
 </LinearLayout>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
@@ -136,3 +137,143 @@ public class WaitTaskQueryClickActivity extends BaseActivity {
 		tvTitle.setText(((RadioButton) rGroup.getChildAt(index)).getText());
 	}
 }
+=======
+package com.edu.fireeyes.activity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.LayoutParams;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.edu.fireeyes.R;
+import com.edu.fireeyes.base.BaseActivity;
+
+public class WaitTaskQueryClickActivity extends BaseActivity {
+
+	private RadioGroup rGroup;
+	private RadioButton rBtn;
+	private ImageView ivBack;
+	private ListView lv;
+	private ArrayAdapter<String> adapter;
+	private ArrayList<String> data = new ArrayList<String>();// 测试RadioButton用
+	private ArrayList<String> list = new ArrayList<String>();// 测试ListVIew
+	private TextView tvTitle;
+	private Intent intent; 
+
+	@Override
+	protected void getIntentData(Bundle savedInstanceState) {
+
+	}
+
+	@Override
+	protected void loadXml() {
+		setContentView(R.layout.activity_wait_query_task_click);
+	}
+
+	@Override
+	protected void initView() {
+		rGroup = (RadioGroup) findViewById(R.id.activity_wait_query_task_click_rgroup);
+		ivBack = (ImageView) findViewById(R.id.activity_wait_query_task_click_back);
+		lv = (ListView) findViewById(R.id.activity_wait_query_task_click_lv);
+		tvTitle = (TextView) findViewById(R.id.activity_wait_query_task_click_tv);
+	}
+
+	@Override
+	protected void registerListener() {
+		ivBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
+		/**
+		 * 单选监听
+		 */
+		rGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				rBtn = (RadioButton) findViewById(checkedId);
+
+				if (rBtn.isChecked()) {
+//					Toast.makeText(WaitTaskQueryClickActivity.this, rBtn.getText(), 0).show();
+					tvTitle.setText(rBtn.getText());
+				}
+
+			}
+		});
+		
+		/**
+		 * ListView监听
+		 */
+		lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				intent = new Intent(WaitTaskQueryClickActivity.this, WaitTaskClickListViewClickActivity.class);
+				startActivity(intent);
+				
+			}
+		});
+
+	}
+
+	@Override
+	protected void initData() {
+		
+		initRadioGroup();
+
+		adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1);
+		for (int i = 0; i < 15; i++) {
+			adapter.add("第一" + i);
+		}
+		lv.setAdapter(adapter);
+		
+	}
+
+	private void initRadioGroup() {
+		data = getIntent().getStringArrayListExtra("data");
+		String checked = getIntent().getStringExtra("checkedId");
+		int index = Integer.parseInt(checked);
+		for (int i = 0; i < data.size(); i++) {
+			rBtn = new RadioButton(this);
+			rBtn.setText(data.get(i));
+			Bitmap bit = null;
+			rBtn.setButtonDrawable(new BitmapDrawable(bit));
+			rBtn.setTextSize(15f);
+			rBtn.setPadding(15, 6, 15, 6);
+			rBtn.setBackgroundResource(R.drawable.rbtn_check);
+			rBtn.setTextColor(R.drawable.rbtn_text_check);
+			rBtn.setGravity(Gravity.CENTER);
+			RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+			params.setMargins(15, 0, 15, 0);
+			params.gravity = Gravity.CENTER;
+			rBtn.setLayoutParams(params);
+			rGroup.addView(rBtn);
+		}
+		((RadioButton) rGroup.getChildAt(index)).setChecked(true);
+		tvTitle.setText(((RadioButton) rGroup.getChildAt(index)).getText());
+	}
+}
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3

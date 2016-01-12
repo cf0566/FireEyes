@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -89,3 +90,96 @@
       
    
 </LinearLayout>
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical" >
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0E88D5"
+        android:padding="10dp"
+        android:gravity="center_vertical"
+        >
+
+        <TextView
+            android:id="@+id/activity_main_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新建任务"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+        <ImageView 
+            android:id="@+id/activity_main_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/help"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+     <RadioGroup 
+        android:id="@+id/newbuild_task_rgroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#FFF"
+        >
+        <RadioButton 
+            android:id="@+id/newbuild_task_rbtn_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/query_task_rbtn_text_selector"
+            android:button="@null"
+            android:background="@null"
+            android:text="新建模板"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:checked="true"
+            />
+        <RadioButton 
+            android:id="@+id/newbuild_task_rbtn_genenal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/query_task_rbtn_text_selector"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="通用模板"
+            />
+        <RadioButton 
+            android:id="@+id/newbuild_task_rbtn_industry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/query_task_rbtn_text_selector"
+            android:button="@null"
+            android:gravity="center_horizontal"
+            android:background="@null"
+            android:layout_weight="1"
+            android:text="行业模板"
+            />
+    </RadioGroup>
+    
+     <TextView 
+         style="@style/my_divide_line"
+         />
+     
+    <FrameLayout 
+        android:id="@+id/newbuild_task_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        ></FrameLayout>
+      
+      
+      
+   
+</LinearLayout>
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3

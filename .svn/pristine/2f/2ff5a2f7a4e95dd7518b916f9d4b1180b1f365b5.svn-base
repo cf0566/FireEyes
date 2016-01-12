@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -83,4 +84,91 @@
             android:text="选择“无”，则表示****" />
     </LinearLayout>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/item_desizing_report_fragment_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1.装修材料的燃烧性能等级规范"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/item_desizing_report_fragment_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/tianjia" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#F3F3F3"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon"
+            android:drawablePadding="5dp"
+            android:gravity="center_vertical"
+            android:text="规范解释"
+            android:textColor="#678CA9"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/item_desizing_report_fragment_tv_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="表示什么什么什么，如图所示，则符合规范"
+            android:textColor="#9D9D9D"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/item_desizing_report_fragment_iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/pic1" />
+
+        <TextView
+            android:id="@+id/item_desizing_report_fragment_tv_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="选择“是”，则表示****" />
+
+        <TextView
+            android:id="@+id/item_desizing_report_fragment_tv_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="选择“否”，则表示****" />
+
+        <TextView
+            android:id="@+id/item_desizing_report_fragment_tv_none"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="选择“无”，则表示****" />
+    </LinearLayout>
+
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
 </LinearLayout>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -178,4 +179,186 @@
         </LinearLayout>
     </ScrollView>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#0E88D5"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/activity_using_explain_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="使用说明"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/activity_using_explain_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="目录"
+                android:textSize="20sp" />
+
+
+                <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn1"
+                    android:text="一、免费注册"
+                    android:tag="0"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                   <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn2"
+                    android:text="二、登录"
+                    android:tag="1"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                   <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn3"
+                    android:text="三、首页"
+                    android:tag="2"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                   <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn4"
+                    android:text="四、新建任务"
+                    android:tag="3"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                
+                  <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn5"
+                    android:text="五、查勘任务"
+                    android:tag="4"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                  <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn6"
+                    android:text="六、评估记录"
+                    android:tag="5"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                  <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn7"
+                    android:text="七、风险评估广场"
+                    android:tag="6"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                 <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn8"
+                    android:text="八、标准规范"
+                    android:tag="7"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                 <CheckBox
+                    android:id="@+id/activity_using_explain_rbtn9"
+                    android:text="九、个人中心"
+                    android:tag="8"
+                    style="@style/my_explain_for_useandnormal"
+                  />
+
+                <com.edu.fireeyes.views.MyListView
+                    android:id="@+id/activity_using_explain_lv_num9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" >
+                </com.edu.fireeyes.views.MyListView>
+                
+                
+        </LinearLayout>
+    </ScrollView>
+
+>>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
 </LinearLayout>
