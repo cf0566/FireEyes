@@ -191,14 +191,21 @@ public class LoginActivity extends BaseActivity{
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				if(result!=null&&result.code==1){
-					showShortToast("登录成功");
-					editor.putString("token", result.token);
-					editor.apply();
-					//Log.d(TAG, result.data.login+":"+result.data.pwd);
-					Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-					startActivity(intent);
-					finish();
+				if(result!=null){
+					if(result.code==1){
+						showShortToast("登录成功");
+						editor.putString("token", result.token);
+						editor.apply();
+						//Log.d(TAG, result.data.login+":"+result.data.pwd);
+						Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+						startActivity(intent);
+						finish();
+					}else if(result.code==2){
+						showShortToast("密码错误");
+						etPassword.setText("");
+					}else{
+						showShortToast("登录失败:"+result.msg);
+					}					
 				}
 			}
 			
