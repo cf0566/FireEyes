@@ -3,9 +3,7 @@ package com.edu.fireeyes.data;
 public class LoginResult {
 	public int code;
 	public String msg;
-	public Data data;
-	public Company company;
-	public String token;
+	public Data data;	
 	public static class Data{
 		public int com_user_id;
 		public String  user_name;
@@ -21,7 +19,9 @@ public class LoginResult {
 		public String birthday;
 		public String status;
 		public String create_time;
-		public String token;
+		public boolean company;
+		//public Company company;
+		public String token;		
 	}
 	public static class Company {
 		public String company_id;

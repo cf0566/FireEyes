@@ -158,7 +158,7 @@ public class LoginActivity extends BaseActivity{
 			showShortToast("用户名或密码不得为空");
 			return;
 		}
-		SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+		final SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
 		final SharedPreferences.Editor editor=sharedPref.edit();
 		editor.putString("name", name);
 		editor.putString("password", password);
@@ -194,9 +194,9 @@ public class LoginActivity extends BaseActivity{
 				if(result!=null){
 					if(result.code==1){
 						showShortToast("登录成功");
-						editor.putString("token", result.token);
+						editor.putString("token", result.data.token);
 						editor.apply();
-						//Log.d(TAG, result.data.login+":"+result.data.pwd);
+						//Log.d(TAG, result.data.login+":"+result.data.token);						
 						Intent intent=new Intent(LoginActivity.this,MainActivity.class);
 						startActivity(intent);
 						finish();
