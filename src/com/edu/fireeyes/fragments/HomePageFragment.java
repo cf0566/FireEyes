@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.LoginActivity;
 import com.edu.fireeyes.activity.MainActivity;
@@ -24,17 +26,39 @@ import com.edu.fireeyes.activity.NormalExampleActivity;
 import com.edu.fireeyes.activity.SocialCompanyActivity;
 import com.edu.fireeyes.activity.UsingExplainActivity;
 import com.edu.fireeyes.adapter.HomePageGridviewAdapter;
+import com.edu.fireeyes.bean.CheckListInfo;
+import com.edu.fireeyes.bean.HomePageAd;
+import com.edu.fireeyes.bean.HomePageAdInfo;
+import com.edu.fireeyes.bean.HomePageAdList;
+import com.edu.fireeyes.bean.TaskList;
+import com.edu.fireeyes.bean.TaskListData;
+import com.edu.fireeyes.utils.UrlUtils;
 import com.gc.flashview.FlashView;
 import com.gc.flashview.listener.FlashViewListener;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
+/**
+ * 首页
+ * 
+ * @author MBENBEN
+ *
+ */
 public class HomePageFragment extends Fragment {
 
 	private FlashView flv;
-	private ArrayList<String> imageUrls;
+	
 	private GridView gv;
 	private HomePageGridviewAdapter adapter;
 	private List<String> data = new ArrayList<String>();
+	private ArrayList<HomePageAdInfo> info;
+	private ArrayList<String> imgUrls = new ArrayList<String>();
 	private Intent intent;
+	private HttpUtils post;
+	private RequestParams params;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,8 +69,6 @@ public class HomePageFragment extends Fragment {
 		initDatas();
 
 		loadViewPager();
-
-		loadGridView();
 
 		registerListener();
 
@@ -89,27 +111,29 @@ public class HomePageFragment extends Fragment {
 					startActivity(intent);
 					break;
 				case 6:
-					AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-					String [] tel = {"400-000-000  呼叫>>"};
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							getActivity());
+					String[] tel = { "400-000-000  呼叫>>" };
 					builder.setTitle("拨打客服电话找回密码");
-					builder.setItems(tel, new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Intent intent = new Intent(Intent.ACTION_CALL,
-									Uri.parse("tel:400-000-000"));
-							startActivity(intent);
-						}
-					
-					});
+					builder.setItems(tel,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Intent intent = new Intent(
+											Intent.ACTION_CALL, Uri
+													.parse("tel:400-000-000"));
+									startActivity(intent);
+								}
+
+							});
 					builder.show();
 					break;
 				case 7:
-					 intent = new Intent(getActivity(),
-					 LoginActivity.class);
-					 startActivity(intent);
-//					MainActivity activity3 = (MainActivity) getActivity();
-//					activity3.Mine();
+
+					MainActivity activity3 = (MainActivity) getActivity();
+					activity3.Mine();
 
 					break;
 
@@ -122,8 +146,8 @@ public class HomePageFragment extends Fragment {
 	}
 
 	private void initDatas() {
-		String str[] = { "新建任务", "查勘任务", "历史记录", "社会单位", "使用说明", "标准规范", "联系客服",
-				"个人中心" };
+		String str[] = { "新建任务", "查勘任务", "历史记录", "社会单位", "使用说明", "标准规范",
+				"联系客服", "个人中心" };
 		for (int i = 0; i < str.length; i++) {
 			data.add(str[i]);
 		}
@@ -132,29 +156,59 @@ public class HomePageFragment extends Fragment {
 		gv.setAdapter(adapter);
 	}
 
-	private void loadGridView() {
-
-	}
-
 	private void initViews(View view) {
 		flv = (FlashView) view.findViewById(R.id.fragment_homepage_flashview);
 		gv = (GridView) view.findViewById(R.id.fragment_homepage_gridview);
 	}
 
 	private void loadViewPager() {
-		// 给该对象设置要展示的图片的网址
-		imageUrls = new ArrayList<String>();
-		imageUrls.add("http://img2.3lian.com/img2007/19/33/005.jpg");
-		imageUrls.add("http://pic2.ooopic.com/01/03/51/25b1OOOPIC19.jpg");
-		imageUrls
-				.add("http://pica.nipic.com/2008-03-19/2008319183523380_2.jpg");
-		flv.setImageUris(imageUrls);
+		/*
+		 * 第一步：创建网络请求对象
+		 */
+		post = new HttpUtils();
 
+		post.configCurrentHttpCacheExpiry(10 * 1000);
+		/*
+		 * 第二步：通过send方法开始本次网络请求
+		 */
+		params = new RequestParams();
+		params.addBodyParameter("a", "home");
+		post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL, params,
+				new RequestCallBack<String>() {
+
+					@Override
+					public void onFailure(
+							com.lidroid.xutils.exception.HttpException arg0,
+							String arg1) {
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						
+						String result = arg0.result;
+						HomePageAdList obj = JSONObject.parseObject(result,
+								HomePageAd.class).getData();
+						info = obj.getAd();
+					}
+				});
+
+		// 给该对象设置要展示的图片的网址
+
+		imgUrls.add("http://img2.3lian.com/img2007/19/33/005.jpg");
+		imgUrls.add("http://h.hiphotos.baidu.com/zhidao/pic/item/00e93901213fb80eb469f9fc34d12f2eb9389465.jpg");
+		imgUrls.add("http://pica.nipic.com/2008-03-19/2008319183523380_2.jpg");
+		
+		
+		flv.setImageUris(imgUrls);
+
+		/**
+		 * ViewPager的图片监听事件，项目中占时不需要，所以先不用
+		 */
 		flv.setOnPageClickListener(new FlashViewListener() {
 
 			@Override
 			public void onClick(int position) {
-				Toast.makeText(getActivity(), "图片" + position, 0).show();
+
 			}
 		});
 	}

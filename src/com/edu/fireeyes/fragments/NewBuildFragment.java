@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
@@ -17,6 +18,7 @@ public class NewBuildFragment extends Fragment{
 	private RadioGroup rGroup;
 	private FragmentManager fm;
 	private FragmentTransaction trans;
+	private RadioButton rBtnNew,rBtnGenenal,rBtnIndustry;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,6 +75,20 @@ public class NewBuildFragment extends Fragment{
 
 	private void initViews(View view) {
 		rGroup = (RadioGroup) view.findViewById(R.id.newbuild_task_rgroup);
+		rBtnNew = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_new);
+		rBtnGenenal = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_genenal);
+		rBtnIndustry = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_industry);
 	}
+	
+	public void newBuild(){
+		rBtnNew.setChecked(true);
+	}
+	public void Genenal(){
+		rBtnGenenal.setChecked(true);
+	}
+	public void Industry(){
+		rBtnIndustry.setChecked(true);
+	}
+	
 
 }

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-             android:paddingLeft="5dp"
+            android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:src="@drawable/back" />
 
@@ -38,60 +38,82 @@
             android:src="@drawable/help" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/jibenxinxi"
-            android:drawablePadding="5dp"
-            android:gravity="center_vertical"
-            android:text="单位信息"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/activity_wait_query_task_tv_company_inform"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:drawablePadding="5dp"
-            android:drawableRight="@drawable/go5"
-            android:gravity="right|center_vertical"
-            android:text="中国科技大学"
-            android:textColor="#A2A2A2" />
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal" >
+            android:orientation="vertical" >
 
-            <RadioGroup
-                android:id="@+id/activity_wait_query_task_rgroup"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F7F7F7"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="15dp" >
-            </RadioGroup>
-        </LinearLayout>
-    </HorizontalScrollView>
+                android:padding="10dp" >
 
-    <com.edu.fireeyes.views.MyListView
-        android:id="@+id/activity_wait_query_task_mlv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:listSelector="#00000000" >
-    </com.edu.fireeyes.views.MyListView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/jibenxinxi"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="单位信息"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/activity_wait_query_task_tv_company_inform"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/go5"
+                    android:gravity="right|center_vertical"
+                    android:text="中国科技大学"
+                    android:textColor="#A2A2A2" />
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <RadioGroup
+                        android:id="@+id/activity_wait_query_task_rgroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#F7F7F7"
+                        android:orientation="horizontal"
+                        android:padding="15dp" >
+                    </RadioGroup>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <com.edu.fireeyes.views.MyListView
+                android:id="@+id/activity_wait_query_task_mlv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:listSelector="#00000000"
+                android:scrollbars="none" >
+            </com.edu.fireeyes.views.MyListView>
+
+            <Button
+                android:id="@+id/activity_wait_query_task_btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/login"
+                android:text="提  交"
+                android:textColor="#FFF" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -3,9 +3,12 @@ package com.edu.fireeyes.activity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.edu.fireeyes.R;
@@ -15,6 +18,7 @@ public class NormalExampleItemActivity extends BaseActivity{
 	
 	private DrawerLayout layout;
 	private ListView lvMenu;
+	private ImageView ivBack;
 	private String [] str = {"总则","术语","厂房（仓库）",
 			"甲、乙、丙类液体、气体储罐（区）与可燃材料堆场",
 			"民用建筑","消防车道","建筑构造","消防给水和灭火设施",
@@ -36,11 +40,18 @@ public class NormalExampleItemActivity extends BaseActivity{
 	protected void initView() {
 		lvMenu = (ListView) findViewById(R.id.activity_normal_example_item_menu_lv_content);
 		layout = (DrawerLayout) findViewById(R.id.activity_normal_example_item_drawerlayout);
+		ivBack = (ImageView) findViewById(R.id.activity_normal_example_iv_back);
 	}
 
 	@Override
 	protected void registerListener() {
-		
+		ivBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
  	}
 
 	@Override

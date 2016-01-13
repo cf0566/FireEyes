@@ -140,6 +140,5 @@
         android:visibility="gone"
         ></ExpandableListView>
 
-    
 
 </LinearLayout>

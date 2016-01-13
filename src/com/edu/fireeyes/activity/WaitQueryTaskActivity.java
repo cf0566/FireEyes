@@ -32,15 +32,17 @@ public class WaitQueryTaskActivity extends BaseActivity {
 	// 返回键
 	private ImageView ivBack;
 
+	//列表项
 	private MyListView mlv;
 	
+	//选择项
 	private RadioGroup rGroup;
 	private RadioButton rBtn;
 
 	private Intent intent;
-
+	//适配器
 	private WaitQueryTaskActivityListViewAdapter adapter;
-
+	
 	private ArrayList<String> rBtnList = new ArrayList<String>();
 	
 	private ArrayList<String> data = new ArrayList<String>();
@@ -110,7 +112,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 
 		initRadioGroup();
 		adapter = new WaitQueryTaskActivityListViewAdapter(WaitQueryTaskActivity.this);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 3; i++) {
 			data.add("测试"+i);
 		}
 		adapter.setDatas(data);
@@ -125,6 +127,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 		for (int i = 0; i < rBtnList.size(); i++) {
 			rBtn = new RadioButton(this);
 			rBtn.setText(rBtnList.get(i));
+			rBtn.setTag(i);
 			Bitmap bit = null;
 			rBtn.setButtonDrawable(new BitmapDrawable(bit));
 			rBtn.setTextSize(15f);
@@ -139,11 +142,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			rBtn.setLayoutParams(params);
 			rGroup.addView(rBtn);
 		}
-	}
-
-	private int getIdentify() {
-		return getResources().getIdentifier("test", "drawable",
-				getPackageName());
+		
 	}
 
 }

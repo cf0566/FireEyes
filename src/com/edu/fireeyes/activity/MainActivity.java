@@ -3,13 +3,10 @@ package com.edu.fireeyes.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -22,7 +19,6 @@ import com.edu.fireeyes.fragments.HomePageFragment;
 import com.edu.fireeyes.fragments.MoreFragment;
 import com.edu.fireeyes.fragments.NewBuildFragment;
 import com.edu.fireeyes.fragments.QueryFragment;
-
 public class MainActivity extends BaseActivity {
 
 	// rbtn的管理类

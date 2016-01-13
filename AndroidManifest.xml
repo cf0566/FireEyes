@@ -82,7 +82,10 @@
         </activity>
         <activity android:name="com.edu.fireeyes.activity.WaitTaskClickListViewClickActivity" >
         </activity>
-        <activity android:name="com.edu.fireeyes.activity.RemarkActivity"></activity>
+        <activity android:name="com.edu.fireeyes.activity.RemarkActivity" >
+        </activity>
+        <activity android:name="com.edu.fireeyes.activity.SocialCompanyTaskActivity" >
+        </activity>
     </application>
 
 </manifest>

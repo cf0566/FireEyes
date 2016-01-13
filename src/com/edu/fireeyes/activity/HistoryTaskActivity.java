@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
 import com.edu.fireeyes.R;
@@ -14,6 +16,9 @@ public class HistoryTaskActivity extends BaseActivity{
 	
 	private TextView tvAdvice;
 	private ImageView ivBack;
+	private SeekBar sBar;//评分条
+	private TextView tvScore;
+	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
 		
@@ -28,6 +33,8 @@ public class HistoryTaskActivity extends BaseActivity{
 	protected void initView() {
 		tvAdvice = (TextView) findViewById(R.id.activity_history_tv_advice);
 		ivBack = (ImageView) findViewById(R.id.activity_history_back);
+		sBar = (SeekBar) findViewById(R.id.activity_history_sbar_score);
+		tvScore = (TextView) findViewById(R.id.activity_history_tv_score);
 	}
 
 	@Override
@@ -47,11 +54,14 @@ public class HistoryTaskActivity extends BaseActivity{
 				onBackPressed();
 			}
 		});
+		
 	}
 
 	@Override
 	protected void initData() {
-		
+		sBar.setEnabled(false);
+		sBar.setProgress(59);
+		tvScore.setText(59+"");
 	}
 
 }

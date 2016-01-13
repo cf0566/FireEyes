@@ -4,27 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.bean.CheckListInfo;
 
 public class WaitQueryTaskListViewAdapter extends BaseAdapter {
 
-	private List<String> datas = new ArrayList<String>();
+	private List<CheckListInfo> datas = new ArrayList<CheckListInfo>();
 	private Context context;
 	
 
@@ -33,7 +23,7 @@ public class WaitQueryTaskListViewAdapter extends BaseAdapter {
 
 	}
 
-	public void setDatas(List<String> datas) {
+	public void setDatas(List<CheckListInfo> datas) {
 		this.datas = datas;
 	}
 
@@ -68,8 +58,8 @@ public class WaitQueryTaskListViewAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvTask.setText("测试任务");
-		holder.tvName.setText("评估组员："+datas.get(position));
+		holder.tvTask.setText(datas.get(position).getTask_name());
+		holder.tvName.setText("评估组员："+datas.get(position).getUsers());
 		return convertView;
 	}
 

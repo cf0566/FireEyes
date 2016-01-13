@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.sax.StartElementListener;
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -14,9 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.activity.MainActivity;
+import com.edu.fireeyes.bean.UnSubmitTaskListInfo;
+import com.edu.fireeyes.fragments.NewBuildFragment;
+import com.edu.fireeyes.fragments.NewBuildTaskfragment;
 
 public class FragmentWaitSubmitTaskAdapter extends BaseAdapter {
-	private List<String> datas = new ArrayList<String>();
+	
+	private List<UnSubmitTaskListInfo> datas = new ArrayList<UnSubmitTaskListInfo>();
 	private Context context;
 
 	public FragmentWaitSubmitTaskAdapter(Context context) {
@@ -24,7 +29,8 @@ public class FragmentWaitSubmitTaskAdapter extends BaseAdapter {
 
 	}
 
-	public void setDatas(List<String> datas) {
+	public void setDatas(List<UnSubmitTaskListInfo> datas) {
+		
 		this.datas = datas;
 	}
 
@@ -62,7 +68,7 @@ public class FragmentWaitSubmitTaskAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
-		holder.tvName.setText(datas.get(position));
+		holder.tvName.setText(datas.get(position).getTask_name());
 		holder.btnSubmit.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -74,8 +80,9 @@ public class FragmentWaitSubmitTaskAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
-				Toast.makeText(context, "修改", 0).show();
+				
 			}
+			
 		});
 		
 		
