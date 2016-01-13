@@ -37,20 +37,19 @@
     </RelativeLayout>
 
     <EditText
-        android:id="@+id/activity_regist_et_tel"
+        android:id="@+id/activity_regist_et_name"
         style="@style/my_edittext_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
-        android:phoneNumber="true"
-        android:padding="5dp"
-        android:textSize="15sp"
-        android:drawablePadding="8dp"
-        android:drawableLeft="@drawable/shoujihao"
-        android:hint="请输入手机号" />
-
+        android:layout_marginTop="40dp"
+         android:padding="5dp"
+         android:textSize="15sp"
+         android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/pinggurenxingming"
+        android:hint="评估人姓名"
+       />
     <EditText
         android:id="@+id/activity_regist_et_password"
         style="@style/my_edittext_style"
@@ -64,21 +63,21 @@
         android:hint="密码"
         android:textSize="15sp"
         android:drawablePadding="8dp"
-        android:password="true" />
+        android:password="true" />    
     <EditText
-        android:id="@+id/activity_regist_et_name"
+        android:id="@+id/activity_regist_et_tel"
         style="@style/my_edittext_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-         android:padding="5dp"
-         android:textSize="15sp"
-         android:drawablePadding="8dp"
-        android:drawableLeft="@drawable/pinggurenxingming"
-        android:hint="评估人姓名"
-       />
+        android:layout_marginRight="30dp"
+        android:phoneNumber="true"
+        android:padding="5dp"
+        android:textSize="15sp"
+        android:drawablePadding="8dp"
+        android:drawableLeft="@drawable/shoujihao"
+        android:hint="请输入手机号" />
     <EditText
         android:id="@+id/activity_regist_et_company"
         style="@style/my_edittext_style"
