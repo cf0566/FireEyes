@@ -165,7 +165,11 @@ public class RegistActivity extends BaseActivity {
 					e.printStackTrace();
 				}				
 				if(result!=null){
-					if(result.getCode()==1)showRegisterSuccess();
+					if(result.getCode()==1){
+						showRegisterSuccess();
+						Intent intent=new Intent(RegistActivity.this,LoginActivity.class);
+						startActivity(intent);
+					}
 					//Log.d(TAG, result.getMsg());
 				}else 
 					showShortToast("注册失败，请重试");
