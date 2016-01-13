@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -22,28 +21,3 @@
     
 
 </LinearLayout>
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:background="#F9F9F9">
-    
-    <CheckBox 
-        android:id="@+id/item_add_import_area_genenal_check_cBox_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="防火、防烟分区符合规范"
-        android:gravity="center_vertical"
-        android:button="@drawable/ziliaojiancha_checbox_selector"
-        android:textSize="12sp"
-        android:padding="10dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:layout_marginLeft="15dp"
-        />
-    
-
-</LinearLayout>
->>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3

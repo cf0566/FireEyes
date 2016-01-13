@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="8dp"
+        android:src="@drawable/button1" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/item_social_company_task_list_tv_taskname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_social_company_task_list_iv"
+            android:drawablePadding="10dp"
+            android:text="任务名称"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/item_social_company_task_list_tv_tasktime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2014-06-16" 
+            android:textSize="12sp"
+            android:textColor="#B8B8B8"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="8dp"
+        android:src="@drawable/go5" />
+
+</LinearLayout>

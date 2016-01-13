@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -75,82 +74,4 @@
         android:text="提  交"
         android:textColor="#FFF" />
 
-=======
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFF"
-    android:orientation="vertical" >
-
-    <RelativeLayout
-        style="@style/title_style"
-        android:gravity="center_vertical" >
-
-        <ImageView
-            android:id="@+id/activity_remark_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:src="@drawable/back" />
-
-        <TextView
-            android:id="@+id/activity_remark_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="备注"
-            android:textColor="#FFF"
-            android:textSize="20sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp" >
-
-        <EditText
-            android:id="@+id/activity_remark_et_content"
-            style="@style/my_edittext_style"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:gravity="top"
-            android:hint="请输入备注内容"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:textSize="15sp"
-            android:padding="10dp" />
-        
-        <ImageView 
-            android:id="@+id/activity_remark_iv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/remark"
-            android:layout_alignLeft="@id/activity_remark_et_content"
-            android:layout_alignBottom="@id/activity_remark_et_content"
-            android:padding="10dp"
-            />
-        
-    </RelativeLayout>
-
-    <Button
-        android:id="@+id/activity_remark_btn_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/login"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        android:text="提  交"
-        android:textColor="#FFF" />
-
->>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
 </LinearLayout>

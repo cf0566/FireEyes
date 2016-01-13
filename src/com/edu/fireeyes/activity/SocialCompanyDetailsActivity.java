@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.edu.fireeyes.activity;
 
 import android.content.Intent;
@@ -72,54 +71,3 @@ public class SocialCompanyDetailsActivity extends BaseActivity{
 	}
 
 }
-=======
-package com.edu.fireeyes.activity;
-
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
-
-import com.edu.fireeyes.R;
-import com.edu.fireeyes.base.BaseActivity;
-
-public class SocialCompanyDetailsActivity extends BaseActivity{
-	private ImageView ivBack;
-	@Override
-	protected void getIntentData(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void loadXml() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.activity_social_details);
-	}
-
-	@Override
-	protected void initView() {
-		// TODO Auto-generated method stub
-		ivBack = (ImageView) findViewById(R.id.activity_social_details_back);
-	}
-
-	@Override
-	protected void registerListener() {
-		// TODO Auto-generated method stub
-		ivBack.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-			}
-		});
-	}
-
-	@Override
-	protected void initData() {
-		// TODO Auto-generated method stub
-		
-	}
-
-}
->>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3

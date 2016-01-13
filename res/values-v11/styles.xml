@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <resources>
 
     <!--
@@ -10,16 +9,3 @@
     </style>
 
 </resources>
-=======
-<resources>
-
-    <!--
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
-        <!-- API 11 theme customizations can go here. -->
-    </style>
-
-</resources>
->>>>>>> b6dd7577822ca1cc6f39000397f14177f4322ba3
