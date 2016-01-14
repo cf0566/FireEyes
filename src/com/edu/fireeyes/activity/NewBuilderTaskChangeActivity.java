@@ -27,7 +27,7 @@ public class NewBuilderTaskChangeActivity extends BaseActivity {
 	// 行业分类按钮 添加组员按钮 监听单位信息 检查项生成
 	// 相机图片监听 相机拍下来的图片
 	private ImageView ivCamara, ivIcon, ivDivide, ivDivideIndustry,
-			ivAddPeople, ivDelete, ivCompany;
+			ivAddPeople, ivDelete, ivCompany,ivBack;
 	private TextView tvChecked;
 	private ArrayList<String> people;
 
@@ -58,6 +58,7 @@ public class NewBuilderTaskChangeActivity extends BaseActivity {
 		tvChecked = (TextView) findViewById(R.id.activity_newbuild_task_change_tv_create);
 		ivDivide = (ImageView) findViewById(R.id.activity_newbuild_task_change_iv_divide);
 		ivDelete = (ImageView) findViewById(R.id.activity_newbuild_task_change_iv_delete);
+		ivBack = (ImageView) findViewById(R.id.activity_newbuild_task_change_back);
 	}
 
 	@Override
@@ -156,6 +157,13 @@ public class NewBuilderTaskChangeActivity extends BaseActivity {
 			public void onClick(View v) {
 				ivIcon.setVisibility(View.INVISIBLE);
 				ivDelete.setVisibility(View.INVISIBLE);
+			}
+		});
+		ivBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
 			}
 		});
 	}

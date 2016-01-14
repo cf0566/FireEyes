@@ -34,6 +34,18 @@
                 android:text="标准规范"
                 android:textColor="#FFF"
                 android:textSize="20sp" />
+            <TextView 
+                 android:id="@+id/activity_normal_example_tv_item_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="菜单"
+                android:textColor="#FFF"
+                android:textSize="18sp"
+                />
+            
+            
         </RelativeLayout>
 
         <TextView
@@ -54,6 +66,7 @@
             android:layout_margin="15dp"
             android:text="内容"
             android:textSize="15sp" />
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -61,9 +74,10 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="right"
-        android:background="#33ff0000"
+        android:background="#000"
         android:clickable="true" >
 
+        
         <TextView
             android:id="@+id/activity_normal_example_item_menu_tv_title"
             android:layout_width="wrap_content"

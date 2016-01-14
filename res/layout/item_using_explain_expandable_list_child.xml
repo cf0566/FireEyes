@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="#F9F9F9"
+    android:orientation="horizontal" 
+    android:gravity="center_vertical">
+    
+    <TextView 
+        android:id="@+id/item_using_explain_expandable_list_tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="注册账号"
+        android:drawableLeft="@drawable/button"
+        android:drawablePadding="5dp"
+        android:layout_marginLeft="10sp"
+        android:textSize="15sp"
+        />
+		
+</LinearLayout>

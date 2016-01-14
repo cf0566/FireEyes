@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#000"
+    android:padding="10dp"
+    android:orientation="horizontal" >
+    
+    
+    <TextView 
+        android:id="@+id/item_normal_example_sliding_list_tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="总则"
+        android:textColor="#FFF"
+        android:drawableLeft="@drawable/button1"
+        android:drawablePadding="10dp"
+        android:textSize="15sp"
+        />
+
+</LinearLayout>

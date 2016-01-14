@@ -28,122 +28,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-             android:paddingLeft="5dp"
+            android:paddingLeft="5dp"
             android:paddingRight="5dp"
-          android:src="@drawable/back" />
+            android:src="@drawable/back" />
     </RelativeLayout>
 
-    <ScrollView
+  <TextView 
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="目录"
-                android:textSize="20sp" />
-            <LinearLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="#FFF"
-                android:gravity="center_vertical"
-                >
-                <TextView 
-                    android:id="@+id/activity_normal_example_tv_num1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="一、建筑设计防火规范"
-                     android:singleLine="true"
-                    android:ellipsize="end"
-                    android:layout_weight="1"
-                    />
-                <CheckBox 
-                    android:id="@+id/activity_normal_example_cbox_num1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-                
-            </LinearLayout>
-            <com.edu.fireeyes.views.MyListView 
-                android:id="@+id/activity_normal_example_lv_num1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                ></com.edu.fireeyes.views.MyListView>
-            
-                     <LinearLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="#FFF"
-                android:gravity="center_vertical"
-                >
-                <TextView 
-                    android:id="@+id/activity_normal_example_tv_num2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="二、安全标注及其使用导则"
-                     android:singleLine="true"
-                    android:ellipsize="end"
-                    android:layout_weight="1"
-                    />
-                <CheckBox 
-                    android:id="@+id/activity_normal_example_cbox_num2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-                
-            </LinearLayout>
-            <com.edu.fireeyes.views.MyListView 
-                android:id="@+id/activity_normal_example_lv_num2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                ></com.edu.fireeyes.views.MyListView>
-            
-            
-            
-                     <LinearLayout 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                android:background="#FFF"
-                android:gravity="center_vertical"
-                >
-                <TextView 
-                    android:id="@+id/activity_normal_example_tv_num3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="三、石油化工企业可燃气体和有毒气体检测"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:layout_weight="1"
-                    />
-                <CheckBox 
-                    android:id="@+id/activity_normal_example_cbox_num3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
-                
-            </LinearLayout>
-            <com.edu.fireeyes.views.MyListView 
-                android:id="@+id/activity_normal_example_lv_num3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                ></com.edu.fireeyes.views.MyListView>
-            
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="目录"
+        android:textSize="20sp"
+        android:background="#F9F9F9"
+        />
+    <ExpandableListView 
+        android:id="@+id/activity_normal_example_elv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:groupIndicator="@null"
+        ></ExpandableListView>
 
 </LinearLayout>

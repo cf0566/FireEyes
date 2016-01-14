@@ -3,12 +3,14 @@ package com.edu.fireeyes.activity;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -16,11 +18,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.adapter.SocialCompanyListViewAdapter;
 import com.edu.fireeyes.base.BaseActivity;
-import com.edu.fireeyes.bean.ReCheckListInfo;
 import com.edu.fireeyes.bean.SocialCompanyInfo;
 import com.edu.fireeyes.bean.SocialCompanyList;
-import com.edu.fireeyes.bean.TaskList;
-import com.edu.fireeyes.bean.TaskListData;
 import com.edu.fireeyes.utils.UrlUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -36,6 +35,7 @@ public class SocialCompanyActivity extends BaseActivity{
 	private ArrayList<SocialCompanyInfo> datas;
 	private RequestParams params;
 	private HttpUtils post;
+	private SharedPreferences sp;
 	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
@@ -103,8 +103,11 @@ public class SocialCompanyActivity extends BaseActivity{
          /*
          * 第二步：通过send方法开始本次网络请求
          * */
+        sp = PreferenceManager.getDefaultSharedPreferences(SocialCompanyActivity.this);
+        String token = sp.getString("token", "");
          params = new RequestParams();
          params.addBodyParameter("a", "getSocialList");
+         params.addBodyParameter("token",token);
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
 			@Override
