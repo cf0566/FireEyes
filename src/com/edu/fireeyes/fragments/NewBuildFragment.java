@@ -80,15 +80,4 @@ public class NewBuildFragment extends Fragment{
 		rBtnIndustry = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_industry);
 	}
 	
-	public void newBuild(){
-		rBtnNew.setChecked(true);
-	}
-	public void Genenal(){
-		rBtnGenenal.setChecked(true);
-	}
-	public void Industry(){
-		rBtnIndustry.setChecked(true);
-	}
-	
-
 }

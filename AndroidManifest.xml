@@ -86,6 +86,10 @@
         </activity>
         <activity android:name="com.edu.fireeyes.activity.SocialCompanyTaskActivity" >
         </activity>
+        <activity android:name="com.edu.fireeyes.activity.NewBuilderGenenalTaskActivity"></activity>
+    	<activity android:name="com.edu.fireeyes.activity.NewBuilderIndustryTaskActivity"></activity>
+    	<activity android:name="com.edu.fireeyes.activity.NewBuilderTaskChangeActivity"></activity>
+    	
     </application>
 
 </manifest>
