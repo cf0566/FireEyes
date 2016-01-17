@@ -11,10 +11,11 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.data.TaskMembers.Member;
 
 public class AddPeopleListViewAdapter extends BaseAdapter {
 
-	private List<String> datas = new ArrayList<String>();
+	private List<Member> datas = new ArrayList<Member>();
 	private Context context;
 
 	public AddPeopleListViewAdapter(Context context) {
@@ -22,7 +23,7 @@ public class AddPeopleListViewAdapter extends BaseAdapter {
 
 	}
 
-	public void setDatas(List<String> datas) {
+	public void setDatas(List<Member> datas) {
 		this.datas = datas;
 	}
 
@@ -57,7 +58,9 @@ public class AddPeopleListViewAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tvName.setText(datas.get(position));
+		holder.tvName.setText(datas.get(position).user_name);
+		if(datas.get(position).checked)holder.cBox.setChecked(true);
+		else holder.cBox.setChecked(false);
 
 		return convertView;
 

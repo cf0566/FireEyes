@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        style="@style/title_style"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/activity_com_in3_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/activity_com_in3_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="单位基本信息"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/activity_com_in3_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="保存"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/my_divide_line"
+                android:layout_marginTop="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="单位名称"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="*"
+                    android:textColor="#F00"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/activity_com_in3_et_com_name"
+                    style="@style/my_edittext_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:paddingLeft="5dp" />
+            </LinearLayout>
+
+            <TextView style="@style/my_divide_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="基本信息"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView style="@style/my_divide_line" />
+
+            <com.edu.fireeyes.views.MyListView 
+                android:id="@+id/listview_company_base_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:divider="#DADADA"
+                android:dividerHeight="0.5dip"/>
+            
+            <TextView style="@style/my_divide_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="其它信息"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView style="@style/my_divide_line" />
+
+            <com.edu.fireeyes.views.MyListView 
+                android:id="@+id/listview_company_more_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:divider="#DADADA"
+                android:dividerHeight="0.5dip"/>
+            <TextView style="@style/my_divide_line"
+                android:layout_marginBottom="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

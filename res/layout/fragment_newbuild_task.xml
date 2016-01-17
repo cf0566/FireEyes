@@ -122,7 +122,7 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/activity_newbuild_tv_name"
+                        android:id="@+id/activity_newbuild_et_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="40dp"
@@ -270,7 +270,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="分配任务"
+                        android:text="检查项目"
                         android:layout_marginLeft="10dp"
                         android:textSize="15sp" />
 
@@ -282,7 +282,7 @@
                         android:textSize="15sp" />
 
                     <ImageView
-                        android:id="@+id/activity_newbuild_iv_divide"
+                        android:id="@+id/activity_newbuild_iv_check"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -317,11 +317,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="检查项生成"
+                        android:text="分配任务"
                         android:textSize="15sp" />
 
                     <TextView
-                        android:id="@+id/activity_newbuild_tv_create"
+                        android:id="@+id/activity_newbuild_tv_divide"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="*"
@@ -369,24 +369,49 @@
                          />
                 </LinearLayout>
 				<TextView style="@style/my_divide_line" />
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <ImageView
-                        android:id="@+id/activity_newbuild_iv"
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/pic5" />
-
-                    <ImageView
-                        android:id="@+id/activity_newbuild_iv_delete"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/activity_newbuild_iv"
-                        android:layout_alignRight="@+id/activity_newbuild_iv"
-                        android:src="@drawable/open" />
-                </RelativeLayout>
+				<LinearLayout 
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal">
+				    <RelativeLayout
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content" >
+	
+	                    <ImageView
+	                        android:id="@+id/activity_newbuild_iv1"
+	                        android:layout_width="80dp"
+	                        android:layout_height="60dp"
+	                        android:src="@drawable/pic5" />
+	
+	                    <ImageView
+	                        android:id="@+id/activity_newbuild_iv_delete1"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:layout_alignBottom="@+id/activity_newbuild_iv1"
+	                        android:layout_alignRight="@+id/activity_newbuild_iv1"
+	                        android:src="@drawable/open" />
+                	</RelativeLayout>
+                	<RelativeLayout
+                	    android:layout_marginLeft="6dip"
+	                    android:layout_width="match_parent"
+	                    android:layout_height="wrap_content" >
+	
+	                    <ImageView
+	                        android:id="@+id/activity_newbuild_iv2"
+	                        android:layout_width="80dp"
+	                        android:layout_height="60dp"
+	                        android:src="@drawable/pic5" />
+	
+	                    <ImageView
+	                        android:id="@+id/activity_newbuild_iv_delete2"
+	                        android:layout_width="wrap_content"
+	                        android:layout_height="wrap_content"
+	                        android:layout_alignBottom="@+id/activity_newbuild_iv2"
+	                        android:layout_alignRight="@+id/activity_newbuild_iv2"
+	                        android:src="@drawable/open" />
+                	</RelativeLayout>
+				</LinearLayout>
+                
             </LinearLayout>
 
             <LinearLayout

@@ -1,6 +1,10 @@
 package com.edu.fireeyes.data;
-
-public class LoginResult {
+/**
+ * The result for the register user who has only limited privileges
+ * @author dannl
+ *
+ */
+public class LoginResultPrivate{
 	public int code;
 	public String msg;
 	public Data data;	
@@ -20,19 +24,8 @@ public class LoginResult {
 		public String birthday;
 		public String status;
 		public String create_time;
-		//public boolean company;
+		public boolean company;
 		//public Company company;
 		public String token;		
 	}
-	public static class Company {
-		public String company_id;
-		public String company_name;
-		public String company_user;
-		public String company_admin;
-		public String contact_person;
-		public String contact_mobile;
-		public String address;
-		public String admin_pwd;
-	}
 }
-

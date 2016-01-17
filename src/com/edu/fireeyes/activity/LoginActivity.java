@@ -24,6 +24,8 @@ import com.edu.fireeyes.R;
 import com.edu.fireeyes.base.BaseActivity;
 import com.edu.fireeyes.data.Constants;
 import com.edu.fireeyes.data.LoginResult;
+import com.edu.fireeyes.data.LoginResultCompany;
+import com.edu.fireeyes.data.LoginResultPrivate;
 import com.edu.fireeyes.utils.ProgressDialogHandle;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -178,7 +180,7 @@ public class LoginActivity extends BaseActivity{
 			public void onFailure(HttpException arg0, String arg1) {
 				// TODO Auto-generated method stub
 				if(progressDialog!=null)progressDialog.dismiss();
-				showShortToast("登录失败，请重试");
+				showShortToast("登录失败，请检查网络连接");
 			}
 
 			@Override
@@ -187,19 +189,31 @@ public class LoginActivity extends BaseActivity{
 				if(progressDialog!=null)progressDialog.dismiss();
 				LoginResult result=null;
 				try{
-					result=JSON.parseObject(arg0.result,LoginResult.class);
+					result=JSON.parseObject(arg0.result,LoginResult.class);	
+					// Maybe you need to clear user company info when change user
+					if(result.data.company_user==0){
+						LoginResultPrivate resultPri=JSON.parseObject(arg0.result,LoginResultPrivate.class);
+						//Log.d(TAG, "company:"+resultPri.data.company);
+					}else if(result.data.company_user==1){
+						LoginResultCompany resultCom=JSON.parseObject(arg0.result,LoginResultCompany.class);
+						//Log.d(TAG, "company:"+resultCom.data.company.company_name);
+					}
 				}catch(Exception e){
 					e.printStackTrace();
+					//Log.d(TAG, e.getMessage());
 				}
 				if(result!=null){
 					if(result.code==1){
 						showShortToast("登录成功");
 						editor.putString("token", result.data.token);
 						editor.apply();
-						//Log.d(TAG, result.data.login+":"+result.data.token);						
+						/*String token=sharedPref.getString("token", null);
+						Log.d(TAG, result.data.login+":"+token);*/						
 						Intent intent=new Intent(LoginActivity.this,MainActivity.class);
 						startActivity(intent);
 						finish();
+					}else if(result.code==0){
+						showShortToast("用户不存在");
 					}else if(result.code==2){
 						showShortToast("密码错误");
 						etPassword.setText("");
@@ -210,5 +224,5 @@ public class LoginActivity extends BaseActivity{
 			}
 			
 		});
-	}
+	}	
 }
