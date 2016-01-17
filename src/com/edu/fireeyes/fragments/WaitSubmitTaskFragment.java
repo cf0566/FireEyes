@@ -2,13 +2,19 @@ package com.edu.fireeyes.fragments;
 
 import java.util.ArrayList;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
@@ -31,6 +37,7 @@ public class WaitSubmitTaskFragment extends Fragment{
 	
 	private HttpUtils post ;//获取网络请求
 	private RequestParams params;//post请求字符串拼接
+	private SharedPreferences sp;//本地保存的token读取
 	
 	
 //	private Button btnSubmit,btnChange;
@@ -49,7 +56,14 @@ public class WaitSubmitTaskFragment extends Fragment{
 		return v;
 	}
 	private void registListener() {
+		lv.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+			
+			}
+		});
 	}
 	private void initData() {
 		adapter = new FragmentWaitSubmitTaskAdapter(getActivity());
@@ -70,14 +84,18 @@ public class WaitSubmitTaskFragment extends Fragment{
          /*
          * 第二步：通过send方法开始本次网络请求
          * */
+        sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+	    String token = sp.getString("token", "");
          params = new RequestParams();
          params.addBodyParameter("a", "getTaskList");
+         params.addBodyParameter("token", token);
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
 			@Override
 			public void onFailure(
 					com.lidroid.xutils.exception.HttpException arg0,
 					String arg1) {
+				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
 			}
 
 			@Override

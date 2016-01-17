@@ -1,7 +1,6 @@
 package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,23 +21,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.fireeyes.R;
-import com.edu.fireeyes.adapter.FragmentWaitSubmitTaskAdapter;
 import com.edu.fireeyes.adapter.WaitQueryTaskActivityListViewAdapter;
 import com.edu.fireeyes.base.BaseActivity;
 import com.edu.fireeyes.views.MyListView;
 
 public class WaitQueryTaskActivity extends BaseActivity {
-
 	// 返回键
 	private ImageView ivBack;
-
 	//列表项
 	private MyListView mlv;
-	
 	//选择项
 	private RadioGroup rGroup;
 	private RadioButton rBtn;
-
+	//单位信息
+	private TextView tvComInfo;
+	//提交
+	private Button btnSubmit;
+	//意图
 	private Intent intent;
 	//适配器
 	private WaitQueryTaskActivityListViewAdapter adapter;
@@ -62,6 +61,8 @@ public class WaitQueryTaskActivity extends BaseActivity {
 		ivBack = (ImageView) findViewById(R.id.activity_wait_query_task_back);
 		mlv = (MyListView) findViewById(R.id.activity_wait_query_task_mlv);
 		rGroup = (RadioGroup) findViewById(R.id.activity_wait_query_task_rgroup);
+		btnSubmit = (Button) findViewById(R.id.activity_wait_query_task_btn_submit);
+		tvComInfo = (TextView) findViewById(R.id.activity_wait_query_task_tv_company_inform);
 	}
 
 	@Override
@@ -104,6 +105,21 @@ public class WaitQueryTaskActivity extends BaseActivity {
 				ivCheck.setImageResource(R.drawable.dui);
 			}
 		});
+		
+		/**
+		 * 提交按钮监听
+		 */
+		btnSubmit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				showShortToast("提交");
+			}
+			
+		});
+		
+		
+		
 
 	}
 
@@ -117,7 +133,6 @@ public class WaitQueryTaskActivity extends BaseActivity {
 		}
 		adapter.setDatas(data);
 		mlv.setAdapter(adapter);
-
 	}
 
 	private void initRadioGroup() {

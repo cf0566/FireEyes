@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
@@ -49,7 +50,6 @@ public class RequeryTaskFragment extends Fragment{
 	private ReQueryTaskListViewAdapter adapter;
 	//数据源
 	private List<ReCheckListInfo> datas = new ArrayList<ReCheckListInfo>();
-	
 	//跳转
 	private Intent intent;
 	private HttpUtils post;
@@ -82,12 +82,14 @@ public class RequeryTaskFragment extends Fragment{
          * */
          params = new RequestParams();
          params.addBodyParameter("a", "getTaskList");
+         params.addBodyParameter("token", "");
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
 			@Override
 			public void onFailure(
 					com.lidroid.xutils.exception.HttpException arg0,
 					String arg1) {
+//				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
 			}
 
 			@Override
@@ -141,8 +143,6 @@ public class RequeryTaskFragment extends Fragment{
 			}
 			
 		});
-		
-		
 	}
 
 	private void initDatas() {

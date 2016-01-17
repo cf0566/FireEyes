@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -67,12 +68,12 @@ public class WaitQueryTaskFragment extends Fragment{
          * */
          params = new RequestParams();
          params.addBodyParameter("a", "getTaskList");
+         params.addBodyParameter("token", "");
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
 			@Override
-			public void onFailure(
-					com.lidroid.xutils.exception.HttpException arg0,
-					String arg1) {
+			public void onFailure(com.lidroid.xutils.exception.HttpException arg0,String arg1) {
+//				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
 			}
 
 			@Override

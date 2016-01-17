@@ -3,22 +3,26 @@ package com.edu.fireeyes.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.adapter.UsingExplainELVAdapter;
 import com.edu.fireeyes.base.BaseActivity;
-import com.edu.fireeyes.views.MyListView;
 
 public class UsingExplainActivity extends BaseActivity{
 	
-	private MyListView mlvNum1,mlvNum2,mlvNum3,mlvNum4,mlvNum5,mlvNum6,mlvNum7,mlvNum8,mlvNum9;
 	private ImageView ivBack;
-	private CheckBox rBtn1,rBtn2;
 	
+	private UsingExplainELVAdapter adapter;
+	private ExpandableListView elv;
 
+	private String []title = {"测试一","测试二","测试三","测试四"};
+	private String [][]content = {{"好吃 ","hao"},{"不好 ","你好"},{"第三 ","第三第二"},{"一二一 ","嗯哼"}};
+	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
 		
@@ -31,11 +35,9 @@ public class UsingExplainActivity extends BaseActivity{
 
 	@Override
 	protected void initView() {
-		mlvNum1 = (MyListView) findViewById(R.id.activity_using_explain_lv_num1);
-		mlvNum2 = (MyListView) findViewById(R.id.activity_using_explain_lv_num2);
+		
 		ivBack = (ImageView) findViewById(R.id.activity_using_explain_iv_back);
-		rBtn1 = (CheckBox) findViewById(R.id.activity_using_explain_rbtn1);
-		rBtn2 = (CheckBox) findViewById(R.id.activity_using_explain_rbtn2);
+		elv = (ExpandableListView) findViewById(R.id.activity_using_explain_elv);
 	}
 
 	@Override
@@ -50,29 +52,29 @@ public class UsingExplainActivity extends BaseActivity{
 				onBackPressed();
 			}
 		});
-		/**
-		 * CheckBox监听
-		 */
-		rBtn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		elv.setOnChildClickListener(new OnChildClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					mlvNum1.setVisibility(View.VISIBLE);
-				}else{
-					mlvNum1.setVisibility(View.GONE);
-				}
+			public boolean onChildClick(ExpandableListView parent, View v,
+					int groupPosition, int childPosition, long id) {
+				
+				showShortToast(content[groupPosition][childPosition]);
+				return false;
 			}
 		});
-		rBtn2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		elv.setOnGroupClickListener(new OnGroupClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (isChecked) {
-					mlvNum2.setVisibility(View.VISIBLE);
-				}else{
-					mlvNum2.setVisibility(View.GONE);
+			public boolean onGroupClick(ExpandableListView parent, View v,
+					int groupPosition, long id) {
+				ImageView change = (ImageView) v.findViewById(R.id.item_using_explain_expandable_list_iv_change);
+				if (elv.isGroupExpanded(groupPosition)) {
+					change.setImageResource(R.drawable.go7);
+				}else {
+					change.setImageResource(R.drawable.up7);
 				}
+				
+				return false;
 			}
 		});
 		
@@ -80,13 +82,10 @@ public class UsingExplainActivity extends BaseActivity{
 
 	@Override
 	protected void initData() {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(UsingExplainActivity.this,
-				android.R.layout.simple_list_item_1);
-		for (int i = 0; i < 5; i++) {
-			adapter.add("仅为测试");
-		}
-		mlvNum1.setAdapter(adapter);
-		mlvNum2.setAdapter(adapter);
+		adapter = new UsingExplainELVAdapter(UsingExplainActivity.this);
+		adapter.setDatas(title, content);
+		elv.setAdapter(adapter);
+		
 	}
 
 }

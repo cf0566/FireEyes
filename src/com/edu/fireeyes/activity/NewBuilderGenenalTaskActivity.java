@@ -1,4 +1,4 @@
-package com.edu.fireeyes.fragments;
+package com.edu.fireeyes.activity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,67 +14,72 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.fireeyes.R;
-import com.edu.fireeyes.activity.AddPeopleActivity;
-import com.edu.fireeyes.activity.CheckCreatedActivity;
-import com.edu.fireeyes.activity.CompanyBaseInformActivity;
-import com.edu.fireeyes.activity.DivideTaskActivity;
+import com.edu.fireeyes.base.BaseActivity;
 
-public class NewBuildGeneralfragment extends Fragment {
-	//行业分类按钮  添加组员按钮  监听单位信息 检查项生成
-	private TextView tvDivide,tvAddPeople,tvTask,tvCreate,tvExpande;
-	//相机图片监听    相机拍下来的图片
-	private ImageView ivCamara,ivIcon,ivDelete,ivCompany;
-	
+public class NewBuilderGenenalTaskActivity extends BaseActivity {
+
+	private ImageView ivBack;
+	// 行业分类按钮 添加组员按钮 监听单位信息 检查项生成
+	private TextView tvDivide, tvAddPeople, tvTask, tvCreate, tvExpande;
+	// 相机图片监听 相机拍下来的图片
+	private ImageView ivCamara, ivIcon, ivDelete, ivCompany;
 	private LinearLayout linear;
-	
 	private boolean isExpande = false;
-	
+
 	private final static int CAMREA = 0;
 	private final static int ADD_PEOPLE = 1;
 	private final static int ADD_COMPANY = 2;
 	private ArrayList<String> people;
-	
+
 	private Intent intent;
-	
+
 	private Uri cameraUri;
 	private File cameraPic;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.activity_newbuild_general, null);
-		initView(view);
-		registerListener();
-		return view;
-	}
-	
+	protected void getIntentData(Bundle savedInstanceState) {
 
-	public void initView(View view) {
-		tvDivide = (TextView) view.findViewById(R.id.activity_newbuild_general_tv_divide);
-		tvAddPeople = (TextView) view.findViewById(R.id.activity_newbuild_general_tv_people);
-		ivCamara = (ImageView) view.findViewById(R.id.activity_newbuild_general_iv_camera);
-		ivIcon = (ImageView) view.findViewById(R.id.activity_newbuild_general_iv);
-		ivCompany = (ImageView) view.findViewById(R.id.activity_newbuild_general_iv_company);
-		tvCreate = (TextView) view.findViewById(R.id.activity_newbuild_general_tv_create);
-		tvTask = (TextView) view.findViewById(R.id.activity_newbuild_general_tv_task);
-		ivDelete = (ImageView) view.findViewById(R.id.activity_newbuild_general_iv_delete);
-		tvExpande = (TextView) view.findViewById(R.id.activity_newbuild_general_tv_click_expand);
-		
-		linear = (LinearLayout) view.findViewById(R.id.activity_newbuild_general_linearlayout_click);
 	}
-	
-	public void registerListener() {
+
+	@Override
+	protected void loadXml() {
+		setContentView(R.layout.activity_newbuild_general_change);
+	}
+
+	@Override
+	protected void initView() {
+		ivBack = (ImageView) findViewById(R.id.activity_newbuild_genenal_change_back);
+		tvDivide = (TextView) findViewById(R.id.activity_newbuild_genenal_change_tv_divide);
+		tvAddPeople = (TextView) findViewById(R.id.activity_newbuild_genenal_change_tv_people);
+		ivCamara = (ImageView) findViewById(R.id.activity_newbuild_genenal_change_iv_camera);
+		ivIcon = (ImageView) findViewById(R.id.activity_newbuild_genenal_change_iv);
+		ivCompany = (ImageView) findViewById(R.id.activity_newbuild_genenal_change_iv_company);
+		tvCreate = (TextView) findViewById(R.id.activity_newbuild_genenal_change_tv_create);
+		tvTask = (TextView) findViewById(R.id.activity_newbuild_genenal_change_tv_task);
+		ivDelete = (ImageView) findViewById(R.id.activity_newbuild_genenal_change_iv_delete);
+		tvExpande = (TextView) findViewById(R.id.activity_newbuild_genenal_change_tv_click_expand);
+
+		linear = (LinearLayout) findViewById(R.id.activity_newbuild_genenal_change_linearlayout_click);
+	}
+
+	@Override
+	protected void registerListener() {
+		ivBack.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				onBackPressed();
+			}
+		});
+		
 		/**
 		 * 行业分类按钮点击事件
 		 */
@@ -82,7 +87,7 @@ public class NewBuildGeneralfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				AlertDialog.Builder builder = new AlertDialog.Builder(NewBuilderGenenalTaskActivity.this);
 				builder.setTitle("请选择行业分类");
 				final String [] str = {"综合","娱乐场所","写字楼","大型商场","棉纺织仓库","印染厂","木业企业","办公","体育馆","厂房"};
 				
@@ -103,7 +108,7 @@ public class NewBuildGeneralfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getActivity(), AddPeopleActivity.class);
+				intent = new Intent(NewBuilderGenenalTaskActivity.this, AddPeopleActivity.class);
 				startActivityForResult(intent, ADD_PEOPLE);
 			}
 		});
@@ -131,7 +136,7 @@ public class NewBuildGeneralfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getActivity(), CompanyBaseInformActivity.class);
+				intent = new Intent(NewBuilderGenenalTaskActivity.this, CompanyBaseInformActivity.class);
 				startActivityForResult(intent, ADD_COMPANY);
 			}
 		});
@@ -143,7 +148,7 @@ public class NewBuildGeneralfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getActivity(), CheckCreatedActivity.class);
+				intent = new Intent(NewBuilderGenenalTaskActivity.this, CheckCreatedActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -155,9 +160,9 @@ public class NewBuildGeneralfragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				if (people == null) {
-					Toast.makeText(getActivity(), "请先添加组员", 0).show();
+					Toast.makeText(NewBuilderGenenalTaskActivity.this, "请先添加组员", 0).show();
 				}else{
-					intent = new Intent(getActivity(), DivideTaskActivity.class);
+					intent = new Intent(NewBuilderGenenalTaskActivity.this, DivideTaskActivity.class);
 					intent.putStringArrayListExtra("people", people);
 					startActivity(intent);
 				}
@@ -189,14 +194,14 @@ public class NewBuildGeneralfragment extends Fragment {
 				}
 			}
 		});
-		
-		
+
+	}
+
+	@Override
+	protected void initData() {
+
 	}
 	
-	
-	public void initData() {
-		
-	}
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,27 +213,6 @@ public class NewBuildGeneralfragment extends Fragment {
 			ivDelete.setVisibility(View.VISIBLE);
 		}
 		
-		if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-			if (data != null) {
-				people = data.getStringArrayListExtra("people");
-				String []name = (String[])people.toArray(new String[people.size()]);
-				StringBuilder sb = new StringBuilder();
-				for (String s : name) {
-					sb.append(s+" ");
-				}
-				
-				tvAddPeople.setText(sb.toString());
-			}
-		}
-	
-		if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
-			if (data != null) {
-				String company = data.getStringExtra("company");
-
-				company = data.getStringExtra("company");
-
-			}
-		}
 		
 	}
 

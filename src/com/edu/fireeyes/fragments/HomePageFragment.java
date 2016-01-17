@@ -54,7 +54,6 @@ public class HomePageFragment extends Fragment {
 	private GridView gv;
 	private HomePageGridviewAdapter adapter;
 	private List<String> data = new ArrayList<String>();
-	private ArrayList<HomePageAdInfo> info;
 	private ArrayList<String> imgUrls = new ArrayList<String>();
 	private Intent intent;
 	private HttpUtils post;
@@ -188,28 +187,30 @@ public class HomePageFragment extends Fragment {
 						String result = arg0.result;
 						HomePageAdList obj = JSONObject.parseObject(result,
 								HomePageAd.class).getData();
-						info = obj.getAd();
+						ArrayList<HomePageAdInfo> info = obj.getAd();
+						for (int j = 0; j < info.size(); j++) {
+							Log.i("oye", info.get(j).getAd_url());
+							imgUrls.add(info.get(j).getAd_url());
+							flv.setImageUris(imgUrls);
+						}
 					}
 				});
 
 		// 给该对象设置要展示的图片的网址
 
-		imgUrls.add("http://img2.3lian.com/img2007/19/33/005.jpg");
-		imgUrls.add("http://h.hiphotos.baidu.com/zhidao/pic/item/00e93901213fb80eb469f9fc34d12f2eb9389465.jpg");
-		imgUrls.add("http://pica.nipic.com/2008-03-19/2008319183523380_2.jpg");
+//		imgUrls.add("http://h.hiphotos.baidu.com/zhidao/pic/item/00e93901213fb80eb469f9fc34d12f2eb9389465.jpg");
+//		imgUrls.add("http://pica.nipic.com/2008-03-19/2008319183523380_2.jpg");
 		
-		
-		flv.setImageUris(imgUrls);
 
 		/**
 		 * ViewPager的图片监听事件，项目中占时不需要，所以先不用
 		 */
-		flv.setOnPageClickListener(new FlashViewListener() {
-
-			@Override
-			public void onClick(int position) {
-
-			}
-		});
+//		flv.setOnPageClickListener(new FlashViewListener() {
+//
+//			@Override
+//			public void onClick(int position) {
+//
+//			}
+//		});
 	}
 }
