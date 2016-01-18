@@ -164,8 +164,10 @@ public class RegistActivity extends BaseActivity {
 				if(result!=null){
 					if(result.getCode()==1){
 						showRegisterSuccess();
-						Intent intent=new Intent(RegistActivity.this,LoginActivity.class);
+						/*Intent intent=new Intent(RegistActivity.this,LoginActivity.class);
 						startActivity(intent);
+						finish();*/
+						onBackPressed();
 					}
 					//Log.d(TAG, result.getMsg());
 				}else 
@@ -204,6 +206,5 @@ public class RegistActivity extends BaseActivity {
 		//if(pwd!=null)etPassWord.setText(pwd);
 		if(phone!=null)etPhone.setText(phone);
 		if(company!=null)etCompany.setText(company);
-	}
-
+	}	
 }

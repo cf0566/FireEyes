@@ -225,4 +225,15 @@ public class LoginActivity extends BaseActivity{
 			
 		});
 	}	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(this);
+		String name=sharedPref.getString("name", null);
+		String password=sharedPref.getString("password", null);
+		boolean autoLogin=sharedPref.getBoolean("autologin", false);
+		if(name!=null)etName.setText(name);
+		if(password!=null)etPassword.setText(password);
+		ckBoxAutoLogin.setChecked(autoLogin);
+	}
 }
