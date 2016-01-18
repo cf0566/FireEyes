@@ -1,6 +1,12 @@
 package com.edu.fireeyes.data;
 
-public class LoginResult {
+import com.edu.fireeyes.data.LoginResult.Company;
+/**
+ * The Login result for company member who has all privileges
+ * @author dannl
+ *
+ */
+public class LoginResultCompany {
 	public int code;
 	public String msg;
 	public Data data;	
@@ -21,18 +27,7 @@ public class LoginResult {
 		public String status;
 		public String create_time;
 		//public boolean company;
-		//public Company company;
+		public Company company;
 		public String token;		
 	}
-	public static class Company {
-		public String company_id;
-		public String company_name;
-		public String company_user;
-		public String company_admin;
-		public String contact_person;
-		public String contact_mobile;
-		public String address;
-		public String admin_pwd;
-	}
 }
-

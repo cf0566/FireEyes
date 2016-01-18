@@ -1,5 +1,7 @@
 package com.edu.fireeyes.base;
 
+import com.shamanland.common.app.CommonActivity;
+
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
@@ -10,7 +12,7 @@ import android.widget.Toast;
  * name:Activity的基类
  *
  */
-public abstract class BaseActivity extends FragmentActivity{
+public abstract class BaseActivity extends CommonActivity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

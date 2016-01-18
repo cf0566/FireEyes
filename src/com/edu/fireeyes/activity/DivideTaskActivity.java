@@ -28,7 +28,7 @@ public class DivideTaskActivity extends BaseActivity{
 	private CheckBox cBox;
 	private TextView tvSave;
 //	private TextView tvSelect,tvChange;
-//	private String [] name = {"周杰伦","郎静茹","詹姆斯"};
+	private String [] name = {"周杰伦","郎静茹","詹姆斯"};
 	private String [][] task = {{"测试一下","测试两下","测试三下"},{"测试两下"},{"测试三下"}};
 	ArrayList<String> task1 =  new ArrayList<String>();
 //	private StringBuilder sb = new StringBuilder();//拼接修改后的字符串
@@ -116,10 +116,11 @@ public class DivideTaskActivity extends BaseActivity{
 		 */
 		adapter = new DivideTaskAdapter(DivideTaskActivity.this);
 		people = getIntent().getStringArrayListExtra("people");
-		String []str = new String[people.size()];
+		/*String []str = new String[people.size()];
 		for (int i = 0; i < people.size(); i++) {
 			str[i] = people.get(i);
-		}
+		}*/
+		String[] str=name;
 		adapter.setDatas(str, task);
 		lvName.setGroupIndicator(null); 
 		lvName.setAdapter(adapter);
