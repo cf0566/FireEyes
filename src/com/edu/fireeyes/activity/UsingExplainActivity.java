@@ -1,5 +1,6 @@
 package com.edu.fireeyes.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -7,7 +8,6 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.adapter.UsingExplainELVAdapter;
@@ -19,6 +19,8 @@ public class UsingExplainActivity extends BaseActivity{
 	
 	private UsingExplainELVAdapter adapter;
 	private ExpandableListView elv;
+	
+	private Intent intent;
 
 	private String []title = {"测试一","测试二","测试三","测试四"};
 	private String [][]content = {{"好吃 ","hao"},{"不好 ","你好"},{"第三 ","第三第二"},{"一二一 ","嗯哼"}};
@@ -57,8 +59,9 @@ public class UsingExplainActivity extends BaseActivity{
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
-				
 				showShortToast(content[groupPosition][childPosition]);
+				intent = new Intent(UsingExplainActivity.this, UsingExplainDetailsActivity.class);
+				startActivity(intent);
 				return false;
 			}
 		});
@@ -73,7 +76,6 @@ public class UsingExplainActivity extends BaseActivity{
 				}else {
 					change.setImageResource(R.drawable.up7);
 				}
-				
 				return false;
 			}
 		});

@@ -76,8 +76,6 @@ public class WaitTaskClickListViewClickActivity extends BaseActivity {
 				}
 			}
 		});
-		
-		
 	}
 
 	@Override

@@ -80,10 +80,7 @@ public class RegistActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(RegistActivity.this,
-						LoginActivity.class);
-				startActivity(intent);
+				onBackPressed();
 			}
 		});
 		/**

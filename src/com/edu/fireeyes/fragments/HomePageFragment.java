@@ -189,7 +189,7 @@ public class HomePageFragment extends Fragment {
 								HomePageAd.class).getData();
 						ArrayList<HomePageAdInfo> info = obj.getAd();
 						for (int j = 0; j < info.size(); j++) {
-							Log.i("oye", info.get(j).getAd_url());
+//							Log.i("oye", info.get(j).getAd_url());
 							imgUrls.add(info.get(j).getAd_url());
 							flv.setImageUris(imgUrls);
 						}

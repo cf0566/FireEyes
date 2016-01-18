@@ -124,21 +124,18 @@ public class RequeryTaskFragment extends Fragment{
 						dialog.dismiss();
 					}
 				});
-				btn = new Button(getActivity());
-				btn.setText("重新查勘任务");
-				btn.setBackgroundResource(R.drawable.login);
-				btn.setTextColor(Color.WHITE);
-				builder.setView(btn);
 				
-				
-				btn.setOnClickListener(new OnClickListener() {
+				builder.setPositiveButton("重新查勘任务", new DialogInterface.OnClickListener() {
 					
 					@Override
-					public void onClick(View v) {
+					public void onClick(DialogInterface dialog, int which) {
 						intent = new Intent(getActivity(), WaitQueryTaskActivity.class);
 						startActivity(intent);
+						dialog.dismiss();
+						
 					}
 				});
+					
 				builder.show();
 			}
 			

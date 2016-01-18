@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.activity.SocialCompanyActivity;
 import com.edu.fireeyes.activity.WaitQueryTaskActivity;
 import com.edu.fireeyes.adapter.WaitQueryTaskListViewAdapter;
 import com.edu.fireeyes.bean.CheckListInfo;
@@ -37,6 +40,7 @@ public class WaitQueryTaskFragment extends Fragment{
 	private Intent intent;
 	private HttpUtils post;//x-utils网络请求
 	private RequestParams params;//请求参数
+	private SharedPreferences sp;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -66,9 +70,11 @@ public class WaitQueryTaskFragment extends Fragment{
          /*
          * 第二步：通过send方法开始本次网络请求
          * */
+         sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
+         String token = sp.getString("token", "");
          params = new RequestParams();
          params.addBodyParameter("a", "getTaskList");
-         params.addBodyParameter("token", "");
+         params.addBodyParameter("token", token);
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
 			@Override
@@ -88,6 +94,9 @@ public class WaitQueryTaskFragment extends Fragment{
 	}
 
 	private void registerListener() {
+		/**
+		 * 列表项点击事件
+		 */
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override

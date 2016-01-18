@@ -32,19 +32,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp" 
+        android:background="@drawable/remark_backgroud">
 
         <EditText
             android:id="@+id/activity_remark_et_content"
-            style="@style/my_edittext_style"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:gravity="top"
             android:hint="请输入备注内容"
+            android:background="@null"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textSize="15sp"
@@ -55,10 +56,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/remark"
-            android:layout_alignLeft="@id/activity_remark_et_content"
-            android:layout_alignBottom="@id/activity_remark_et_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:padding="10dp"
             />
+       <ImageView 
+           android:id="@+id/activity_remark_iv_pic"
+           android:layout_width="80dp"
+           android:layout_height="60dp"
+           android:layout_alignParentBottom="true"
+           android:layout_toRightOf="@id/activity_remark_iv_add"
+           android:layout_margin="10dp"
+           />
         
     </RelativeLayout>
 

@@ -33,6 +33,7 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 	private RelativeLayout relate;
 	private RelativeLayout.LayoutParams params;
 	private RadioGroup rgroup;
+	private int Count = 0;
 
 	public DesizingReportQueryAdapter(Context context) {
 		this.context = context;
@@ -43,6 +44,7 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 		this.datas = datas;
 	}
 
+	
 	@Override
 	public int getCount() {
 		return datas == null ? 0 : datas.size();
@@ -71,7 +73,6 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 					.findViewById(R.id.item_wait_task_listview_click_tv_content);
 			holder.parentll = (LinearLayout) convertView
 					.findViewById(R.id.item_wait_task_listview_click_parent_linear);
-			
 			
 			convertView.setTag(holder);
 		} else {
@@ -108,6 +109,8 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 			
 			@Override
 			public void onClick(View v) {
+				Count++;
+				Toast.makeText(context, Count+"", 0).show();
 				addSelectView();
 				holder.parentll.addView(relate,params);
 				
@@ -116,6 +119,8 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 					
 					@Override
 					public void onClick(View v) {
+						Count--;
+						Toast.makeText(context, Count+"", 0).show();
 						holder.parentll.removeView((View) v.getParent());
 					}
 				});
@@ -127,10 +132,9 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 						context.startActivity(intent);
 					}
 				});
-				
 			}
+			
 		});
-		
 
 		return convertView;
 	}
@@ -140,7 +144,6 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 		TextView tvContent;
 		LinearLayout parentll;
 		Button btnTis,btnDel;
-		
 	}
 	
 	
@@ -149,7 +152,6 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 		relate.setGravity(Gravity.CENTER_VERTICAL);
 		relate.setBackgroundColor(Color.parseColor("#F9F9F9"));
 		params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-		
 		rgroup = new RadioGroup(context);
 		LayoutParams param1 = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 		param1.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
@@ -161,6 +163,15 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 		rbtn1.setText("是");
 		rbtn2.setText("否");
 		rbtn3.setText("无");
+		rbtn1.setTextSize(12);
+		rbtn2.setTextSize(12);
+		rbtn3.setTextSize(12);
+		rbtn1.setPadding(0, 0, 20, 0);
+		rbtn2.setPadding(0, 0, 20, 0);
+		rbtn3.setPadding(0, 0, 20, 0);
+		rbtn1.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
+		rbtn2.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
+		rbtn3.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
 		rgroup.addView(rbtn1);
 		rgroup.addView(rbtn2);
 		rgroup.addView(rbtn3);
@@ -186,7 +197,5 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 		LayoutParams param2 = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 		param2.addRule(RelativeLayout.LEFT_OF, 3);//此控件在id为1的控件的右边
 		relate.addView(btnTis,param2);
-		
 	}
-
 }

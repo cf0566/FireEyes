@@ -27,7 +27,7 @@ import com.edu.fireeyes.views.MyListView;
 
 public class WaitQueryTaskActivity extends BaseActivity {
 	// 返回键
-	private ImageView ivBack;
+	private ImageView ivBack,ivCheck;
 	//列表项
 	private MyListView mlv;
 	//选择项
@@ -45,8 +45,10 @@ public class WaitQueryTaskActivity extends BaseActivity {
 	private ArrayList<String> rBtnList = new ArrayList<String>();
 	
 	private ArrayList<String> data = new ArrayList<String>();
+	//从跳转后界面传回来的item总数
+	private String Count;
 	
-
+	private final static int IV_CHANGE_CODE = 0;
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
 	}
@@ -83,7 +85,17 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				rBtn = (RadioButton) findViewById(checkedId);
-				Toast.makeText(WaitQueryTaskActivity.this, rBtn.getText(), 0).show();
+				int num = Integer.parseInt(rBtn.getTag().toString());
+				showLongToast(checkedId+"");
+				
+				data.clear();
+				adapter = new WaitQueryTaskActivityListViewAdapter(WaitQueryTaskActivity.this);
+				for (int i = 0; i < num; i++) {
+					data.add("测试"+i);
+				}
+				adapter.setDatas(data);
+				adapter.notifyDataSetChanged();
+				mlv.setAdapter(adapter);
 			}
 		});
 
@@ -96,13 +108,15 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				/**
-				 * 找到小箭头的控件，当点击跳转后将箭头设为对号
+				 * 页面跳转
 				 */
-				ImageView ivCheck = (ImageView) view.findViewById(R.id.item_wait_query_task_activity_iv);
+				ivCheck = (ImageView) view.findViewById(R.id.item_wait_query_task_activity_iv);
+				if (Count != null && !"1".equals(Count)) {
+					ivCheck.setImageResource(R.drawable.dui);
+				}
 				intent = new Intent(WaitQueryTaskActivity.this,
 						WaitTaskClickListViewClickActivity.class);
-				startActivity(intent);
-				ivCheck.setImageResource(R.drawable.dui);
+				startActivityForResult(intent, IV_CHANGE_CODE);
 			}
 		});
 		
@@ -115,24 +129,15 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			public void onClick(View v) {
 				showShortToast("提交");
 			}
-			
 		});
 		
-		
-		
-
 	}
 
 	@Override
 	protected void initData() {
 
 		initRadioGroup();
-		adapter = new WaitQueryTaskActivityListViewAdapter(WaitQueryTaskActivity.this);
-		for (int i = 0; i < 3; i++) {
-			data.add("测试"+i);
-		}
-		adapter.setDatas(data);
-		mlv.setAdapter(adapter);
+		
 	}
 
 	private void initRadioGroup() {
@@ -140,6 +145,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			rBtnList.add("测试" + i + "号");
 		}
 		for (int i = 0; i < rBtnList.size(); i++) {
+			
 			rBtn = new RadioButton(this);
 			rBtn.setText(rBtnList.get(i));
 			rBtn.setTag(i);
@@ -156,8 +162,15 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			params.gravity = Gravity.CENTER;
 			rBtn.setLayoutParams(params);
 			rGroup.addView(rBtn);
+			if (i == 0) {
+				rGroup.check(rBtn.getId());
+			}
 		}
-		
 	}
-
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == IV_CHANGE_CODE && resultCode == RESULT_OK) {
+			Count = data.getStringExtra("Count");
+		}
+	}
 }

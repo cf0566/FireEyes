@@ -27,7 +27,7 @@
         </activity>
         <activity
             android:name="com.edu.fireeyes.activity.LoginActivity"
-            android:launchMode="singleTask" >
+             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name="com.edu.fireeyes.activity.RegistActivity"
-            android:launchMode="singleTask" >
+            >
         </activity>
         <activity android:name="com.edu.fireeyes.activity.SetPersonalInformationActivity" >
         </activity>
@@ -89,6 +89,7 @@
         <activity android:name="com.edu.fireeyes.activity.NewBuilderGenenalTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderIndustryTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderTaskChangeActivity"></activity>
+    	<activity android:name="com.edu.fireeyes.activity.UsingExplainDetailsActivity"></activity>
     	
     </application>
 
