@@ -86,13 +86,13 @@
         </activity>
         <activity android:name="com.edu.fireeyes.activity.SocialCompanyTaskActivity" >
         </activity>
-        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInform3Activity" >
+        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInfo3Activity" >
         </activity>
         <activity android:name="com.edu.fireeyes.activity.NewBuilderGenenalTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderIndustryTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderTaskChangeActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.UsingExplainDetailsActivity"></activity>
-    	
+    	<activity android:name="com.edu.fireeyes.activity.CheckCreatedActivity2" >  </activity>
     </application>
 
 </manifest>

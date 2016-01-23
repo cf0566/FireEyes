@@ -32,10 +32,12 @@ import android.widget.Toast;
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.AddPeopleActivity;
 import com.edu.fireeyes.activity.CheckCreatedActivity;
+import com.edu.fireeyes.activity.CheckCreatedActivity2;
 import com.edu.fireeyes.activity.CompanyBaseInform2Activity;
-import com.edu.fireeyes.activity.CompanyBaseInform3Activity;
+import com.edu.fireeyes.activity.CompanyBaseInfo3Activity;
 import com.edu.fireeyes.activity.DivideTaskActivity;
-import com.edu.fireeyes.data.TaskInfo;
+import com.edu.fireeyes.data.Constants;
+import com.edu.fireeyes.data.InitTaskInfo;
 
 public class NewBuildTaskfragment extends Fragment {
 	//行业分类按钮  添加组员按钮  监听单位信息 检查项生成
@@ -131,7 +133,7 @@ public class NewBuildTaskfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				TaskInfo taskInfo=parentFrag.getTaskInfo();
+				InitTaskInfo taskInfo=parentFrag.getTaskInfo();
 				if(taskInfo==null){
 					Toast.makeText(getActivity(), "加载失败，请重试",Toast.LENGTH_SHORT ).show();
 					parentFrag.initTask();
@@ -205,7 +207,8 @@ public class NewBuildTaskfragment extends Fragment {
 					Toast.makeText(getActivity(), "加载失败，请重试",Toast.LENGTH_SHORT ).show();
 					parentFrag.initTask();
 				}else{
-					intent = new Intent(getActivity(), CompanyBaseInform3Activity.class);
+					intent = new Intent(getActivity(), CompanyBaseInfo3Activity.class);
+					intent.putExtra("taskId", parentFrag.getTaskInfo().data.task_id);
 					intent.putExtra("companyInfoItems", parentFrag.getTaskInfo().data.organizations);
 					startActivityForResult(intent, ADD_COMPANY);
 				}				
@@ -219,8 +222,15 @@ public class NewBuildTaskfragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				intent = new Intent(getActivity(), CheckCreatedActivity.class);
-				startActivity(intent);
+				if(parentFrag.getTaskInfo()==null){
+					Toast.makeText(getActivity(), "加载失败，请重试",Toast.LENGTH_SHORT ).show();
+					parentFrag.initTask();
+				}else{
+					intent = new Intent(getActivity(), CheckCreatedActivity2.class);
+					intent.putExtra("type", Constants.typeNew);
+					intent.putExtra("taskId", parentFrag.getTaskInfo().data.task_id);
+					startActivity(intent);
+				}
 			}
 		});
 		/**
@@ -232,12 +242,20 @@ public class NewBuildTaskfragment extends Fragment {
 			public void onClick(View v) {
 				if (parentFrag.getMemberNum() == 0) {
 					Toast.makeText(getActivity(), "请先添加组员", 0).show();
+				}else if(parentFrag.getTaskInfo()==null){
+					Toast.makeText(getActivity(), "加载失败，请重试",Toast.LENGTH_SHORT ).show();
+					parentFrag.initTask();
 				}else{
 					intent = new Intent(getActivity(), DivideTaskActivity.class);
+					intent.putExtra("type", Constants.typeNew);
+					intent.putExtra("taskId", parentFrag.getTaskInfo().data.task_id);
 					startActivityForResult(intent,DIVIDE_TASK);
 				}
 			}
 		});
+		/**
+		 * delete button for pic1
+		 */
 		ivDelete1.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -245,6 +263,9 @@ public class NewBuildTaskfragment extends Fragment {
 				deletePlanePic(0);
 			}
 		});
+		/**
+		 * delete button for pic2
+		 */
 		ivDelete2.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -373,6 +394,18 @@ public class NewBuildTaskfragment extends Fragment {
         	default:
         		break;
             }
+         }else if(resultCode==Activity.RESULT_CANCELED){
+        	 //Log.d(TAG, requestCode+":"+resultCode);
+        	 switch(requestCode){
+             case CAMERA_PIC1:
+            	 deletePlanePic(0);
+             	break;
+             case CAMERA_PIC2:
+            	 deletePlanePic(1);
+             	break;
+             default:
+         		break;
+             	}
          }
 	 }
 }

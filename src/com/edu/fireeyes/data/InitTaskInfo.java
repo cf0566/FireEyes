@@ -6,7 +6,7 @@ import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class TaskInfo {
+public class InitTaskInfo {
 	public int code;
 	public String msg;
 	public Data data;	
@@ -38,7 +38,7 @@ public class TaskInfo {
 			dest.writeList(more);
 		}
 		public static final Parcelable.Creator<Organization> CREATOR=
-				new Parcelable.Creator<TaskInfo.Organization>() {
+				new Parcelable.Creator<InitTaskInfo.Organization>() {
 
 					@Override
 					public Organization createFromParcel(Parcel source) {
@@ -84,7 +84,7 @@ public class TaskInfo {
 			this.info_name=in.readString();
 		}
 		public static final Parcelable.Creator<CompanyInfoItem> CREATOR=
-				new Parcelable.Creator<TaskInfo.CompanyInfoItem>() {
+				new Parcelable.Creator<InitTaskInfo.CompanyInfoItem>() {
 
 					@Override
 					public CompanyInfoItem createFromParcel(Parcel source) {

@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSON;
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.LoginActivity;
 import com.edu.fireeyes.data.Constants;
-import com.edu.fireeyes.data.TaskInfo;
+import com.edu.fireeyes.data.InitTaskInfo;
 import com.edu.fireeyes.data.TaskMembers;
 import com.edu.fireeyes.data.TaskMembers.Member;
 import com.edu.fireeyes.utils.ProgressDialogHandle;
@@ -43,7 +43,7 @@ public class NewBuildFragment extends Fragment{
 	private FragmentTransaction trans;
 	private RadioButton rBtnNew,rBtnGenenal,rBtnIndustry;
 	private Dialog progressDialog;
-	private TaskInfo taskInfo=null;		
+	private InitTaskInfo taskInfo=null;		
 	private String taskName;
 	private int destIndex=0,industryIndex=0,memberNum=0;
 	private File pic1=null,pic2=null;
@@ -143,7 +143,7 @@ public class NewBuildFragment extends Fragment{
 				// TODO Auto-generated method stub
 				if(progressDialog!=null)progressDialog.dismiss();
 				try{
-					taskInfo=JSON.parseObject(arg0.result,TaskInfo.class);	
+					taskInfo=JSON.parseObject(arg0.result,InitTaskInfo.class);	
 				}catch(Exception e){
 					e.printStackTrace();
 				}
@@ -153,7 +153,7 @@ public class NewBuildFragment extends Fragment{
 		});
 	 }
 	
-	public TaskInfo getTaskInfo(){return taskInfo; }
+	public InitTaskInfo getTaskInfo(){return taskInfo; }
 	public String getTaskName(){return taskName;}
 	public int getDestIndex(){return destIndex;}
 	public int getIndustryIndex(){return industryIndex;}
@@ -162,7 +162,7 @@ public class NewBuildFragment extends Fragment{
 	public int getMemberNum(){return memberNum;}
 	public String getCompanyName(){return companyName;}
 	
-	public void setTaskInfo(TaskInfo tInfo){this.taskInfo=tInfo;}
+	public void setTaskInfo(InitTaskInfo tInfo){this.taskInfo=tInfo;}
 	public void setTaskName(String tName){this.taskName=tName;}
 	public void setDestIndex(int index){this.destIndex=index;}
 	public void setIndustryIndex(int index){this.industryIndex=index;}

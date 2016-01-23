@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF"
+    android:orientation="vertical">
+    <TextView         
+        android:background="#F3F3F3"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+	    android:id="@+id/tv_title_item_check_created_child_simple"
+	    android:textSize="14sp" 
+	    android:padding="10dip"
+	    android:text="资料检查项子项"
+	    android:gravity="center_vertical"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" />
+</LinearLayout>

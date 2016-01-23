@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="#F3F3F3"
+	android:orientation="vertical">
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#FFF"
+	    android:orientation="horizontal"
+	    android:gravity="center_vertical"
+	    android:padding="10dp">
+    
+	  <TextView
+          android:id="@+id/tv_title_item_check_created_group"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:drawableLeft="@drawable/zhongdianbuwei"
+          android:gravity="center_vertical"
+          android:text="重点部位" />
+
+      <ImageView
+          android:id="@+id/iv_drop_item_check_created_group"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/go8"
+          android:layout_marginLeft="13dp"
+          android:gravity="center_vertical" />
+      
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          />
+
+      <ImageView
+          android:id="@+id/iv_add_item_check_created_group"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/tianjia" />
+    </LinearLayout>
+    
+</LinearLayout>

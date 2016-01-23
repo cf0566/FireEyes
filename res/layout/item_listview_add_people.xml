@@ -8,11 +8,12 @@
     <ImageView 
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:src="@android:drawable/ic_lock_lock" 
+       android:src="@drawable/button" 
         />
     
     
     <TextView 
+        android:paddingLeft="6dip"
         android:id="@+id/item_listview_add_people_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
