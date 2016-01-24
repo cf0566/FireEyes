@@ -48,7 +48,6 @@ public class DivideTaskActivity extends BaseActivity{
 	private CheckBox cBox;
 	private TextView tvSave;
 	private String taskId,token;
-	private int type;
 	private Dialog progressDialog;
 	private DivideMembers divideMem;
 	private List<DivideMember> members=new ArrayList<DivideMember>();
@@ -58,7 +57,6 @@ public class DivideTaskActivity extends BaseActivity{
 	protected void getIntentData(Bundle savedInstanceState) {
 		Intent intent = getIntent();
 		taskId=intent.getStringExtra("taskId");
-		type=intent.getIntExtra("type", 0);
 	}
 
 	@Override

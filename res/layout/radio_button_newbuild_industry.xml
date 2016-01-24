@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_newbuild_industry2_rbtn"
+    style="@style/my_industry_divide_style"
+    android:layout_margin="20dp"
+    android:text="综合" />

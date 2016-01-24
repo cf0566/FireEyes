@@ -97,7 +97,7 @@ public class NewBuildTaskfragment extends Fragment {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				// TODO Auto-generated method stub
-				Log.d(TAG, ""+checkedId);
+				//Log.d(TAG, ""+checkedId);
 				switch(checkedId){
 				case R.id.activity_newbuild_rbtn_destination1:
 					parentFrag.setDestIndex(0);
@@ -247,7 +247,6 @@ public class NewBuildTaskfragment extends Fragment {
 					parentFrag.initTask();
 				}else{
 					intent = new Intent(getActivity(), DivideTaskActivity.class);
-					intent.putExtra("type", Constants.typeNew);
 					intent.putExtra("taskId", parentFrag.getTaskInfo().data.task_id);
 					startActivityForResult(intent,DIVIDE_TASK);
 				}
@@ -353,7 +352,7 @@ public class NewBuildTaskfragment extends Fragment {
 	     super.onResume();
 	 }
 	 private void showIndustryList(final String[] industries){
-		 int industryIndex=((NewBuildFragment)getParentFragment()).getDestIndex();
+		 int industryIndex=((NewBuildFragment)getParentFragment()).getIndustryIndex();
 		 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setTitle("请选择行业分类");
 			//final String [] str = {"综合","娱乐场所","写字楼","大型商场","棉纺织仓库","印染厂","木业企业","办公","体育馆","厂房"};			
@@ -361,7 +360,7 @@ public class NewBuildTaskfragment extends Fragment {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					parentFrag.setDestIndex(which);
+					parentFrag.setIndustryIndex(which);
 					dialog.dismiss();
 				}
 			});

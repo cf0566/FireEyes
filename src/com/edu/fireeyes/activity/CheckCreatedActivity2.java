@@ -61,6 +61,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 	private CheckArea checkArea;
 	private CheckFocus checkFocus;
 	private CheckUnit checkUnit;
+	private String industryId=null;
 	private Map<String,String> infoSubMap=new HashMap<String,String>();
 	private ArrayList<String> selInfoTitles=new ArrayList<String>(),
 			selInfoIds=new ArrayList<String>(),
@@ -75,6 +76,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 		Intent intent = getIntent();
 		taskId=intent.getStringExtra("taskId");
 		type=intent.getIntExtra("type", 0);
+		if(type==Constants.typeIndustry)industryId=intent.getStringExtra("industryId");
 	}
 
 	@Override
@@ -217,6 +219,9 @@ public class CheckCreatedActivity2 extends BaseActivity {
 		RequestParams params = new RequestParams();		
 		params.addBodyParameter("token", token);
 		params.addBodyParameter("task_id",taskId);
+		params.addBodyParameter("type",String.valueOf(type));
+		if(industryId!=null)params.addBodyParameter("industry_id",industryId);
+		Log.d(TAG, "industryId:"+industryId);
 		HttpUtils http = new HttpUtils();
 		String url=Constants.postUrl+Constants.path_getTaskInfo;
 		http.send(HttpMethod.POST, url, params,new RequestCallBack<String>(){
@@ -260,6 +265,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 		params.addBodyParameter("token", token);
 		params.addBodyParameter("task_id",taskId);
 		params.addBodyParameter("type",String.valueOf(type));
+		if(industryId!=null)params.addBodyParameter("industry_id",industryId);
 		HttpUtils http = new HttpUtils();
 		String url=Constants.postUrl+Constants.path_getTaskArea;
 		http.send(HttpMethod.POST, url, params,new RequestCallBack<String>(){
@@ -297,6 +303,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 		params.addBodyParameter("token", token);
 		params.addBodyParameter("task_id",taskId);
 		params.addBodyParameter("type",String.valueOf(type));
+		if(industryId!=null)params.addBodyParameter("industry_id",industryId);
 		HttpUtils http = new HttpUtils();
 		String url=Constants.postUrl+Constants.path_getKeyArea;
 		http.send(HttpMethod.POST, url, params,new RequestCallBack<String>(){

@@ -92,7 +92,7 @@ public class NewBuildFragment extends Fragment{
 				case R.id.newbuild_task_rbtn_industry:
 					fm = getChildFragmentManager();
 					trans = fm.beginTransaction();
-					trans.replace(R.id.newbuild_task_framelayout, new NewBuildIndustryfragment());
+					trans.replace(R.id.newbuild_task_framelayout, new NewBuildIndustryfragment2());
 					trans.commit();
 					break;
 
