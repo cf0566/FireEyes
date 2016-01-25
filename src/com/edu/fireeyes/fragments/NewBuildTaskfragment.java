@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -48,6 +49,7 @@ public class NewBuildTaskfragment extends Fragment {
 	private RadioGroup rgDest;
 	private EditText etTaskName;
 	private RadioButton rbDest1,rbDest2;
+	private Button btnSave,btnSubmit;
 	
 	private final static int CAMERA_PIC1 = 0;
 	private final static int CAMERA_PIC2 = 1;
@@ -85,6 +87,8 @@ public class NewBuildTaskfragment extends Fragment {
 		rbDest1=(RadioButton)v.findViewById(R.id.activity_newbuild_rbtn_destination1);
 		rbDest2=(RadioButton)v.findViewById(R.id.activity_newbuild_rbtn_destination2);
 		etTaskName=(EditText) v.findViewById(R.id.activity_newbuild_et_name);
+		btnSave=(Button) v.findViewById(R.id.activity_newbuild_save);
+		btnSubmit=(Button) v.findViewById(R.id.activity_newbuild_submit);
 	}
 	
 	
@@ -229,7 +233,7 @@ public class NewBuildTaskfragment extends Fragment {
 					intent = new Intent(getActivity(), CheckCreatedActivity2.class);
 					intent.putExtra("type", Constants.typeNew);
 					intent.putExtra("taskId", parentFrag.getTaskInfo().data.task_id);
-					startActivity(intent);
+					startActivityForResult(intent,CHECK_ITEM);
 				}
 			}
 		});
@@ -273,6 +277,39 @@ public class NewBuildTaskfragment extends Fragment {
 			}
 		});
 		
+		btnSave.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String taskName=parentFrag.getTaskName();
+				String comName=parentFrag.getCompanyName();
+				if(taskName==null||taskName.isEmpty()){
+					Toast.makeText(getActivity(), "任务名称不能为空", Toast.LENGTH_SHORT).show();
+					return;}
+				if(comName==null||comName.isEmpty()){
+					Toast.makeText(getActivity(), "任务名称不能为空", Toast.LENGTH_SHORT).show();
+					return;}				
+			}
+			
+		});
+		
+		btnSubmit.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String taskName=parentFrag.getTaskName();
+				String comName=parentFrag.getCompanyName();
+				if(taskName==null||taskName.isEmpty()){
+					Toast.makeText(getActivity(), "任务名称不能为空", Toast.LENGTH_SHORT).show();
+					return;}
+				if(comName==null||comName.isEmpty()){
+					Toast.makeText(getActivity(), "任务名称不能为空", Toast.LENGTH_SHORT).show();
+					return;}
+			}
+			
+		});
 	}
 	
 	public void initData() {			

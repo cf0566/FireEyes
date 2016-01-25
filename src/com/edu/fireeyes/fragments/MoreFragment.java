@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.AdviceActivity;
+import com.edu.fireeyes.activity.MyMessageActivity;
+import com.edu.fireeyes.activity.MyMessageDetailActivity;
 import com.edu.fireeyes.activity.SaveFileActivity;
 import com.edu.fireeyes.activity.SetPersonalInformationActivity;
 import com.edu.fireeyes.views.CircleImageView;
@@ -22,7 +24,7 @@ import com.edu.fireeyes.views.CircleImageView;
 public class MoreFragment extends Fragment {
 	
 	private CircleImageView ivUserIcon;
-	private TextView tvAdvice,tvUpdate,tvDownLoad;
+	private TextView tvAdvice,tvUpdate,tvDownLoad,tvMessage;
 	private ImageView ivSetting;
 	private Intent intent;
 
@@ -36,6 +38,7 @@ public class MoreFragment extends Fragment {
 		tvUpdate = (TextView) view.findViewById(R.id.more_personal_update);
 		tvDownLoad = (TextView) view.findViewById(R.id.more_personal_download);
 		ivSetting = (ImageView) view.findViewById(R.id.activity_main_more_setting);
+		tvMessage= (TextView) view.findViewById(R.id.more_personal_my_massage);
 		registerListener();
 		return view;
 	}
@@ -89,6 +92,15 @@ public class MoreFragment extends Fragment {
 				startActivity(intent);
 			}
 		});
+		tvMessage.setOnClickListener(new OnClickListener(){
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent=new Intent(getActivity(),MyMessageActivity.class);				
+				startActivity(intent);
+			}
+			
+		});
 	}
 }
