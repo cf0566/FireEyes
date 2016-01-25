@@ -1,16 +1,22 @@
 package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -18,16 +24,28 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.LayoutParams;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.adapter.WaitQueryTaskActivityListViewAdapter;
 import com.edu.fireeyes.base.BaseActivity;
+import com.edu.fireeyes.bean.WaitQueryTask;
+import com.edu.fireeyes.bean.WaitQueryTaskData;
+import com.edu.fireeyes.bean.WaitQueryTaskInfo;
+import com.edu.fireeyes.bean.WaitQueryTaskItems;
+import com.edu.fireeyes.bean.WaitQueryTaskRbtnInfo;
+import com.edu.fireeyes.utils.FileBiz;
+import com.edu.fireeyes.utils.UrlUtils;
 import com.edu.fireeyes.views.MyListView;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 public class WaitQueryTaskActivity extends BaseActivity {
 	// 返回键
-	private ImageView ivBack,ivCheck;
+	private ImageView ivBack;
 	//列表项
 	private MyListView mlv;
 	//选择项
@@ -44,11 +62,16 @@ public class WaitQueryTaskActivity extends BaseActivity {
 	
 	private ArrayList<String> rBtnList = new ArrayList<String>();
 	
-	private ArrayList<String> data = new ArrayList<String>();
-	//从跳转后界面传回来的item总数
-	private String Count;
+	private String task_id,task_item_id,task_object_id;
 	
-	private final static int IV_CHANGE_CODE = 0;
+	
+	ArrayList<WaitQueryTaskRbtnInfo> info;//radiogroup获取
+	ArrayList<WaitQueryTaskInfo> solution;//ListView获取
+	ArrayList<WaitQueryTaskItems> items;//页面跳转的item项获取
+	private HttpUtils post;
+	private RequestParams params;
+	private SharedPreferences sp;
+	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
 	}
@@ -85,41 +108,15 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				rBtn = (RadioButton) findViewById(checkedId);
-				int num = Integer.parseInt(rBtn.getTag().toString());
-				showLongToast(checkedId+"");
-				
-				data.clear();
+//				showShortToast(rBtn.getId()+"");
 				adapter = new WaitQueryTaskActivityListViewAdapter(WaitQueryTaskActivity.this);
-				for (int i = 0; i < num; i++) {
-					data.add("测试"+i);
-				}
-				adapter.setDatas(data);
+				solution = info.get(rBtn.getId()).getSolution();
+				task_item_id = info.get(rBtn.getId()).getTask_item_id();
+				adapter.setDatas(solution,task_id,task_item_id);
 				adapter.notifyDataSetChanged();
 				mlv.setAdapter(adapter);
 			}
 		});
-
-		/**
-		 * 点击ListView跳转
-		 */
-		mlv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				/**
-				 * 页面跳转
-				 */
-				ivCheck = (ImageView) view.findViewById(R.id.item_wait_query_task_activity_iv);
-				if (Count != null && !"1".equals(Count)) {
-					ivCheck.setImageResource(R.drawable.dui);
-				}
-				intent = new Intent(WaitQueryTaskActivity.this,
-						WaitTaskClickListViewClickActivity.class);
-				startActivityForResult(intent, IV_CHANGE_CODE);
-			}
-		});
-		
 		/**
 		 * 提交按钮监听
 		 */
@@ -131,24 +128,126 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			}
 		});
 		
+		tvComInfo.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				intent = new Intent(WaitQueryTaskActivity.this, SocialDetailsBaseInformationActivity.class);
+				intent.putExtra("task_id", task_id);
+				startActivity(intent);
+			}
+		});
+		/**
+		 * 点击ListView跳转
+		 */
+		mlv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+				/**
+				 * 页面跳转
+				 */
+				intent = new Intent(WaitQueryTaskActivity.this,WaitTaskClickListViewClickActivity.class);
+				intent.putExtra("task_id", task_id);
+				intent.putExtra("area_tag",rGroup.getCheckedRadioButtonId()+"");
+				intent.putExtra("solution_tag", position+"");
+				startActivity(intent);
+//				showShortToast(rGroup.getCheckedRadioButtonId()+""+"------"+position+"");
+				
+			}
+		});
+		
 	}
 
 	@Override
 	protected void initData() {
+		//任务的id
+		task_id = getIntent().getStringExtra("task_id");
+		//加载RadioButton个数
+		loadrBtnCount();
+		
+	}
 
-		initRadioGroup();
+	private void loadrBtnCount() {
+		  post = new HttpUtils();
+	        
+	        post.configCurrentHttpCacheExpiry(10*1000);
+	         /*
+	         * 第二步：通过send方法开始本次网络请求
+	         * */
+	         sp = PreferenceManager.getDefaultSharedPreferences(WaitQueryTaskActivity.this);
+	         String token = sp.getString("token", "");
+	         params = new RequestParams();
+	         params.addBodyParameter("a", "getTaskDetail");
+	         params.addBodyParameter("task_id", task_id);
+	         params.addBodyParameter("token", token);
+	         post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
+
+				@Override
+				public void onFailure(com.lidroid.xutils.exception.HttpException arg0,String arg1) {
+//					Toast.makeText(getActivity(), "请检查网络状况", 0).show();
+					Map<String, Object> data = FileBiz.readFromFile(WaitQueryTaskActivity.this);
+					if (data != null) {
+						String url = (String) data.get("url");
+						WaitQueryTask list = JSONObject.parseObject(url, WaitQueryTaskData.class).getData();
+						info = list.getArea();
+//						Log.i("oye", result);
+						for (int i = 0; i < info.size(); i++) {
+							rBtnList.add(info.get(i).getName());
+						}
+						initRadioGroup();
+					}
+				}
+
+				@Override
+				public void onSuccess(ResponseInfo<String> arg0) {
+					String result = arg0.result;
+					Map<String, Object> str = new HashMap<String, Object>();
+					str.put("url", result);
+					boolean isFiled = FileBiz.writeToFile(WaitQueryTaskActivity.this, str);
+//					if (isFiled) {
+//						Log.i("oye", "保存成功");
+//					}else{
+//						Log.i("oye", "保存失败");
+//					}
+					WaitQueryTask data = JSONObject.parseObject(result, WaitQueryTaskData.class).getData();
+					info = data.getArea();
+//					Log.i("oye", result);
+					//将radiobutton的列表项动态添加
+					for (int i = 0; i < info.size(); i++) {
+						rBtnList.add(info.get(i).getName());
+					}
+					initRadioGroup();
+				}
+			});
+		
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+//		Log.i("oye", "重新开启界面");
+//		sp = getSharedPreferences("saveTasks", MODE_PRIVATE);
+//		if (sp != null) {
+//			Log.i("oye", sp.getString("102101101", ""));
+//		}
+		/**
+		 * 当从上一个界面返回的时候执行onstart方法，刷新适配器
+		 */
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 		
 	}
 
 	private void initRadioGroup() {
-		for (int i = 0; i < 12; i++) {
-			rBtnList.add("测试" + i + "号");
-		}
+		
 		for (int i = 0; i < rBtnList.size(); i++) {
-			
 			rBtn = new RadioButton(this);
 			rBtn.setText(rBtnList.get(i));
 			rBtn.setTag(i);
+			rBtn.setId(i);
 			Bitmap bit = null;
 			rBtn.setButtonDrawable(new BitmapDrawable(bit));
 			rBtn.setTextSize(15f);
@@ -162,15 +261,11 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			params.gravity = Gravity.CENTER;
 			rBtn.setLayoutParams(params);
 			rGroup.addView(rBtn);
+			
 			if (i == 0) {
 				rGroup.check(rBtn.getId());
 			}
 		}
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == IV_CHANGE_CODE && resultCode == RESULT_OK) {
-			Count = data.getStringExtra("Count");
-		}
-	}
+	
 }

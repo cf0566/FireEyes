@@ -34,7 +34,7 @@ public class DesizingReportConsultFragment extends Fragment {
 	private void initData() {
 		adapter = new DesizingReportConsultAdapter(getActivity());
 		for (int i = 0; i < 4; i++) {
-			data.add("我是一个长一点的文本，有助于我测试更长的字符创，继续，就是这样长啊");
+			data.add("防火分隔墙上的孔洞采用相应当耐火等级的不燃材料封堵严密，无破坏防火分隔的现象。");
 		}
 		adapter.setDatas(data);
 		lv.setAdapter(adapter);

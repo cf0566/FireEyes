@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:descendantFocusability="beforeDescendants"
+    android:descendantFocusability="blocksDescendants"
     android:padding="10dp" >
 
     <LinearLayout
@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:textSize="18sp"
             android:text="装修燃烧性能等级规范要求" />
 
         <ImageView
@@ -27,5 +28,6 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/tianjia" />
     </LinearLayout>
+    
 
 </LinearLayout>

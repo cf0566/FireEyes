@@ -2,8 +2,11 @@ package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -18,6 +21,7 @@ import com.edu.fireeyes.adapter.SocialCompanyTaskListViewAdapter;
 import com.edu.fireeyes.base.BaseActivity;
 import com.edu.fireeyes.bean.SocialTaskInfo;
 import com.edu.fireeyes.bean.SocialTaskList;
+import com.edu.fireeyes.utils.ProgressDialogHandle;
 import com.edu.fireeyes.utils.UrlUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -37,7 +41,9 @@ public class SocialCompanyTaskActivity extends BaseActivity{
 	private Intent intent;
 	private ImageView ivBack;
 	private HttpUtils post;
+	private SharedPreferences sp;
 	private RequestParams params;
+	private Dialog progressDialog;
 	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
@@ -53,6 +59,7 @@ public class SocialCompanyTaskActivity extends BaseActivity{
 	protected void initView() {
 		lvTask = (ListView) findViewById(R.id.activity_social_task_lv_task);
 		ivBack = (ImageView) findViewById(R.id.activity_social_task_back);
+		progressDialog=ProgressDialogHandle.getProgressDialog(this, null);
 	}
 
 	@Override
@@ -66,6 +73,7 @@ public class SocialCompanyTaskActivity extends BaseActivity{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				intent = new Intent(SocialCompanyTaskActivity.this, SocialCompanyDetailsActivity.class);
+				intent.putExtra("task_id", datas.get(position).getTask_id());
 				startActivity(intent);
 			}
 		});
@@ -96,6 +104,8 @@ public class SocialCompanyTaskActivity extends BaseActivity{
 		/*
          *  第一步：创建网络请求对象
          * */
+		sp = PreferenceManager.getDefaultSharedPreferences(SocialCompanyTaskActivity.this);
+		String token = sp.getString("token", "");
         post = new HttpUtils();
         post.configCurrentHttpCacheExpiry(10*1000);
         
@@ -105,18 +115,21 @@ public class SocialCompanyTaskActivity extends BaseActivity{
          params = new RequestParams();
          params.addBodyParameter("a", "getSocialTasks");
          params.addBodyParameter("organization_id", id);
-         params.addBodyParameter("taken", "");
+         params.addBodyParameter("token", token);
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
-			@Override
-			public void onFailure(
-					com.lidroid.xutils.exception.HttpException arg0,
-					String arg1) {
-				Toast.makeText(SocialCompanyTaskActivity.this, "数据加载失败，请检查网络状况", 0).show();
-			}
-
+        	 @Override
+         	public void onStart() {
+         		 if(progressDialog!=null)progressDialog.show();
+         	}
+ 			@Override
+ 			public void onFailure(com.lidroid.xutils.exception.HttpException arg0,String arg1) {
+ 				if(progressDialog!=null)progressDialog.dismiss();
+ 				showShortToast("无法获取数据，请检查是否开启网络");
+ 			}
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
+				if(progressDialog!=null)progressDialog.dismiss();
 				String result = arg0.result;
 				datas = JSONObject.parseObject(result, SocialTaskList.class).getData();
 				adapter.setDatas(datas);

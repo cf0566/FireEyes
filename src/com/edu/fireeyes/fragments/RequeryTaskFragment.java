@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,15 +42,13 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
  *
  */
 public class RequeryTaskFragment extends Fragment{
-
-	// dialog中的按钮
-	private Button btn;
+	
 	//数据列表
 	private ListView lv;
 	//适配器
 	private ReQueryTaskListViewAdapter adapter;
 	//数据源
-	private List<ReCheckListInfo> datas = new ArrayList<ReCheckListInfo>();
+	ArrayList<ReCheckListInfo> info;
 	//跳转
 	private Intent intent;
 	private HttpUtils post;
@@ -89,14 +88,14 @@ public class RequeryTaskFragment extends Fragment{
 			public void onFailure(
 					com.lidroid.xutils.exception.HttpException arg0,
 					String arg1) {
-//				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
+				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
 			}
 
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
 				String result = arg0.result;
 				TaskListData obj = JSONObject.parseObject(result, TaskList.class).getData();
-				ArrayList<ReCheckListInfo> info = obj.getReCheckList();
+				info = obj.getReCheckList();
 				adapter.setDatas(info);
 				adapter.notifyDataSetChanged();
 			}
@@ -113,8 +112,14 @@ public class RequeryTaskFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				String notPass = info.get(position).getTask_reason();
+//				Log.i("oye", notPass+"");
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-				String [] reason = {"不好不好不好，这也不好那也不好"};
+				if (notPass == null) {
+					notPass = "没有理由，传过来的是空";
+				}
+				String [] reason = {notPass};
 				
 				builder.setTitle("不通过原因的文字描述");
 				builder.setItems(reason, new DialogInterface.OnClickListener() {
@@ -130,12 +135,11 @@ public class RequeryTaskFragment extends Fragment{
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						intent = new Intent(getActivity(), WaitQueryTaskActivity.class);
+						intent.putExtra("task_id", 102+"");
 						startActivity(intent);
 						dialog.dismiss();
-						
 					}
 				});
-					
 				builder.show();
 			}
 			
@@ -144,7 +148,7 @@ public class RequeryTaskFragment extends Fragment{
 
 	private void initDatas() {
 		adapter = new ReQueryTaskListViewAdapter(getActivity());
-		adapter.setDatas(datas);
+		adapter.setDatas(info);
 		lv.setAdapter(adapter);
 	}
 

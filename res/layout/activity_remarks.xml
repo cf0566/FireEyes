@@ -68,6 +68,15 @@
            android:layout_toRightOf="@id/activity_remark_iv_add"
            android:layout_margin="10dp"
            />
+       <ImageView 
+           android:id="@+id/activity_remark_iv_delete"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/open"
+           android:layout_alignBottom="@id/activity_remark_iv_pic"
+           android:layout_alignRight="@id/activity_remark_iv_pic"
+           android:visibility="gone"
+           />
         
     </RelativeLayout>
 

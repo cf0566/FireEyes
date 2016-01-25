@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+     <RelativeLayout
+        style="@style/title_style"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:id="@+id/activity_social_details_base_info_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+             android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/activity_social_details_base_info_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#FFF"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+    
+     <ScrollView 
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         >
+         <LinearLayout 
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical"
+             >
+             <TextView 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:textSize="18sp"
+                 android:padding="10dp"
+                 android:text="基本信息"
+                 />
+             
+            <com.edu.fireeyes.views.MyListView 
+                android:id="@+id/activity_social_details_base_info_lv_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:listSelector="#00000000"
+                android:focusable="false"
+                android:clickable="false"
+                ></com.edu.fireeyes.views.MyListView>
+            
+            
+              <TextView 
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="其他信息"
+                 android:textSize="18sp"
+                 android:padding="10dp"
+                 />
+            
+            
+            <com.edu.fireeyes.views.MyListView 
+                android:id="@+id/activity_social_details_base_info_lv_more"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                 android:listSelector="#00000000"
+                android:focusable="false"
+                android:clickable="false"
+                ></com.edu.fireeyes.views.MyListView>
+             
+             
+         </LinearLayout>
+       
+         
+     </ScrollView>
+
+</LinearLayout>

@@ -1,8 +1,10 @@
 package com.edu.fireeyes.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -20,8 +22,8 @@ public class WaitTaskClickListViewClickActivity extends BaseActivity {
 	private RadioGroup rgroup;
 	private FragmentManager mManager;
 	private FragmentTransaction trans;
-	
-	
+	private String uri;
+	private String content;
 
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
@@ -89,5 +91,4 @@ public class WaitTaskClickListViewClickActivity extends BaseActivity {
 		trans.commit();
 
 	}
-	
 }

@@ -18,6 +18,7 @@
         android:id="@+id/item_wait_query_task_activity_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:src="@drawable/go5"
         />
     

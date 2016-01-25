@@ -1,11 +1,11 @@
 package com.edu.fireeyes.adapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
@@ -23,27 +24,29 @@ import android.widget.Toast;
 
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.RemarkActivity;
-import com.edu.fireeyes.fragments.DesizingReportQueryFragment;
+import com.edu.fireeyes.bean.WaitQueryTaskItems;
+import com.edu.fireeyes.bean.WaitQueryTaskRbtnInfo;
+import com.lidroid.xutils.DbUtils;
 
 public class DesizingReportQueryAdapter extends BaseAdapter {
 
-	private List<String> datas = new ArrayList<String>();
+	private ArrayList<WaitQueryTaskItems> datas;
 	private Context context;
-	private Button btnDel,btnTis;
-	private RelativeLayout relate;
-	private RelativeLayout.LayoutParams params;
-	private RadioGroup rgroup;
-	private int Count = 0;
+	private String item_id;
+	ArrayList<String> rbtnList = new ArrayList<String>();
+	
 
 	public DesizingReportQueryAdapter(Context context) {
 		this.context = context;
 
 	}
-
-	public void setDatas(List<String> datas) {
+	public void setDatas(ArrayList<WaitQueryTaskItems> datas) {
 		this.datas = datas;
-	}
 
+	}
+	public String item_id(){
+		return item_id;
+	}
 	
 	@Override
 	public int getCount() {
@@ -61,7 +64,7 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
 		if (convertView == null) {
 			convertView = View.inflate(context,
@@ -71,131 +74,69 @@ public class DesizingReportQueryAdapter extends BaseAdapter {
 					.findViewById(R.id.item_wait_task_listview_click_iv_add);
 			holder.tvContent = (TextView) convertView
 					.findViewById(R.id.item_wait_task_listview_click_tv_content);
-			holder.parentll = (LinearLayout) convertView
-					.findViewById(R.id.item_wait_task_listview_click_parent_linear);
-			
+//			holder.parentll = (LinearLayout) convertView
+//					.findViewById(R.id.item_wait_task_listview_click_parent_linear);
+
 			convertView.setTag(holder);
 		} else {
-			
 			holder = (ViewHolder) convertView.getTag();
-			
 		}
-		holder.tvContent.setText(datas.get(position));
+		holder.tvContent.setText(datas.get(position).getName());
 		
-		addSelectView();
-		holder.parentll.addView(relate,params);
-		
-		
-		btnDel.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				holder.parentll.removeView((View) v.getParent());
-			}
-		});
-		btnTis.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, RemarkActivity.class);
-				context.startActivity(intent);
-			}
-		});
-		
+//		addView(holder);
+
 		/**
 		 * 添加项
 		 */
-		holder.ivAdd.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Count++;
-				Toast.makeText(context, Count+"", 0).show();
-				addSelectView();
-				holder.parentll.addView(relate,params);
-				
-				
-				btnDel.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						Count--;
-						Toast.makeText(context, Count+"", 0).show();
-						holder.parentll.removeView((View) v.getParent());
-					}
-				});
-				btnTis.setOnClickListener(new OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(context, RemarkActivity.class);
-						context.startActivity(intent);
-					}
-				});
-			}
-			
-		});
+//		holder.ivAdd.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				item_id = datas.get(position).getItem_id();
+//				addView(holder);
+//			}
+//		});
 
 		return convertView;
 	}
+
+//	private void addView(final ViewHolder holder) {
+//		addSelectView();
+//		holder.parentll.addView(relate, params);
+//
+//		btnDel.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				holder.parentll.removeView((View) v.getParent());
+//				Count--;
+//			}
+//		});
+//
+//		btnTis.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context, RemarkActivity.class);
+//				context.startActivity(intent);
+//			}
+//		});
+//
+//		rgroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+//
+//			@Override
+//			public void onCheckedChanged(RadioGroup group, int checkedId) {
+//				rbtn = (RadioButton) group.findViewById(checkedId);
+//				rbtn_state  = checkedId;
+//			}
+//		});
+//	}
 
 	class ViewHolder {
 		ImageView ivAdd;
 		TextView tvContent;
 		LinearLayout parentll;
-		Button btnTis,btnDel;
+		Button btnTis, btnDel;
 	}
-	
-	
-	private void addSelectView() {
-		relate = new RelativeLayout(context);
-		relate.setGravity(Gravity.CENTER_VERTICAL);
-		relate.setBackgroundColor(Color.parseColor("#F9F9F9"));
-		params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
-		rgroup = new RadioGroup(context);
-		LayoutParams param1 = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		param1.addRule(RelativeLayout.ALIGN_PARENT_LEFT|RelativeLayout.CENTER_VERTICAL);
-		rgroup.setId(1);
-		rgroup.setOrientation(RadioGroup.HORIZONTAL);
-		RadioButton rbtn1 = new RadioButton(context);
-		RadioButton rbtn2 = new RadioButton(context);
-		RadioButton rbtn3 = new RadioButton(context);
-		rbtn1.setText("是");
-		rbtn2.setText("否");
-		rbtn3.setText("无");
-		rbtn1.setTextSize(12);
-		rbtn2.setTextSize(12);
-		rbtn3.setTextSize(12);
-		rbtn1.setPadding(0, 0, 20, 0);
-		rbtn2.setPadding(0, 0, 20, 0);
-		rbtn3.setPadding(0, 0, 20, 0);
-		rbtn1.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
-		rbtn2.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
-		rbtn3.setButtonDrawable(R.drawable.rbtn_choose_right_or_not);
-		rgroup.addView(rbtn1);
-		rgroup.addView(rbtn2);
-		rgroup.addView(rbtn3);
-		((RadioButton)rgroup.getChildAt(0)).setChecked(true);
-		relate.addView(rgroup,param1);
-		
-		btnDel = new Button(context);
-		btnDel.setText("删除");
-		btnDel.setTextColor(Color.WHITE);
-		btnDel.setTextSize(15f);
-		btnDel.setBackgroundColor(Color.RED);
-		btnDel.setId(3);
-		LayoutParams param3 = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		param3.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-		relate.addView(btnDel,param3);
-		
-		btnTis = new Button(context);
-		btnTis.setText("备注");
-		btnTis.setTextSize(15f);
-		btnTis.setTextColor(Color.WHITE);
-		btnTis.setBackgroundColor(Color.BLUE);
-		btnTis.setId(2);
-		LayoutParams param2 = new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		param2.addRule(RelativeLayout.LEFT_OF, 3);//此控件在id为1的控件的右边
-		relate.addView(btnTis,param2);
-	}
+
 }

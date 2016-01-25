@@ -45,11 +45,9 @@ public class DesizingReportConsultAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
 		if (convertView == null) {
-			convertView = View.inflate(context,
-					R.layout.item_desizing_report_consult_list, null);
+			convertView = View.inflate(context,R.layout.item_desizing_report_consult_list, null);
 			holder = new ViewHolder();
-			holder.tvTitle = (TextView) convertView
-					.findViewById(R.id.item_desizing_report_fragment_tv_title);
+			holder.tvTitle = (TextView) convertView.findViewById(R.id.item_desizing_report_fragment_tv_title);
 
 			convertView.setTag(holder);
 		} else {

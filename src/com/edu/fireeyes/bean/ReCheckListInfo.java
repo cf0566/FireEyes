@@ -5,6 +5,15 @@ public class ReCheckListInfo {
 	  private String task_id;
 		private String task_name;
 		private String users;
+		private String task_reason;
+		
+		
+		public String getTask_reason() {
+			return task_reason;
+		}
+		public void setTask_reason(String task_reason) {
+			this.task_reason = task_reason;
+		}
 		public String getTask_id() {
 			return task_id;
 		}
@@ -30,8 +39,8 @@ public class ReCheckListInfo {
 		@Override
 		public String toString() {
 			return "ReCheckListInfo [task_id=" + task_id + ", task_name="
-					+ task_name + ", users=" + users + "]";
+					+ task_name + ", users=" + users + ", task_reason="
+					+ task_reason + "]";
 		}
-	
 		
 }

@@ -2,6 +2,7 @@ package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -30,6 +31,7 @@ import com.edu.fireeyes.adapter.SocialCompanyListViewAdapter;
 import com.edu.fireeyes.base.BaseActivity;
 import com.edu.fireeyes.bean.SocialCompanyInfo;
 import com.edu.fireeyes.bean.SocialCompanyList;
+import com.edu.fireeyes.utils.ProgressDialogHandle;
 import com.edu.fireeyes.utils.UrlUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -47,6 +49,7 @@ public class SocialCompanyActivity extends BaseActivity{
 	private HttpUtils post;
 	private SharedPreferences sp;
 	private EditText etSearch;
+	private Dialog progressDialog;
 	
 	private PopupWindow pw;
 	private int screenWidth;
@@ -70,6 +73,7 @@ public class SocialCompanyActivity extends BaseActivity{
 		lvCompanyName = (ListView) findViewById(R.id.activity_social_lv_company_name);
 		ivBack = (ImageView) findViewById(R.id.activity_social_back);
 		etSearch = (EditText) findViewById(R.id.activity_social_et_search);
+		progressDialog=ProgressDialogHandle.getProgressDialog(this, null);
 		
 	}
 
@@ -146,13 +150,19 @@ public class SocialCompanyActivity extends BaseActivity{
          params.addBodyParameter("token",token);
          post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
 
+        	 @Override
+        	public void onStart() {
+        		 if(progressDialog!=null)progressDialog.show();
+        	}
 			@Override
 			public void onFailure(com.lidroid.xutils.exception.HttpException arg0,String arg1) {
-			
+				if(progressDialog!=null)progressDialog.dismiss();
+				showShortToast("无法获取数据，请检查是否开启网络");
 			}
 
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
+				if(progressDialog!=null)progressDialog.dismiss();
 				String result = arg0.result;
 				datas = JSONObject.parseObject(result, SocialCompanyList.class).getData();
 				adapter.setDatas(datas);
@@ -175,8 +185,8 @@ public class SocialCompanyActivity extends BaseActivity{
 		}
 		lvSelectArea.setAdapter(adapter);
 		
-		pw = new PopupWindow(view, screenWidth, LayoutParams.WRAP_CONTENT);
-		pw.setFocusable(true);
+		pw = new PopupWindow(view, screenWidth/2, LayoutParams.WRAP_CONTENT);
+//		pw.setFocusable(true);
 		
 		WindowManager.LayoutParams params = SocialCompanyActivity.this.getWindow()
 				.getAttributes();
@@ -204,8 +214,8 @@ public class SocialCompanyActivity extends BaseActivity{
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 //				Toast.makeText(AddImportCheckActivity.this, adapter.getItem(position), 0).show();
-				pw.dismiss();
 				etSearch.setText(adapter.getItem(position));
+				pw.dismiss();
 			}
 		});
 	}
