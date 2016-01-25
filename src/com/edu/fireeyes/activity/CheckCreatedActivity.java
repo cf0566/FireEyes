@@ -22,16 +22,19 @@ public class CheckCreatedActivity extends BaseActivity {
 
 	private MyListView lvBook;
 	private ImageView ivBack, ivBook,ivArea,ivImport;
+	private ImageView ivDropBook,ivDropArea,ivDropImport;
 	private Intent intent;
 	private ArrayList<String> listBook = new ArrayList<String>();
 	private static final int REQUEST_BOOK = 1;
 	private static final int REQUEST_AREA = 2;
 	private static final int REQUEST_IMPORT = 3;
 	ArrayAdapter<String> adapter;
+	private String taskId;
 
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
-
+		Intent intent = getIntent();
+		taskId=intent.getStringExtra("taskId");
 	}
 
 	@Override
@@ -46,6 +49,9 @@ public class CheckCreatedActivity extends BaseActivity {
 		ivBook = (ImageView) findViewById(R.id.activity_check_created_iv_book);
 		ivArea = (ImageView) findViewById(R.id.activity_check_created_iv_area);
 		ivImport = (ImageView) findViewById(R.id.activity_check_created_iv_import);
+		ivDropBook=(ImageView) findViewById(R.id.activity_check_created_check_book_drop);
+		ivDropArea=(ImageView) findViewById(R.id.activity_check_created_check_area_drop);
+		ivDropImport=(ImageView) findViewById(R.id.activity_check_created_check_import_drop);
 	}
 
 	@Override

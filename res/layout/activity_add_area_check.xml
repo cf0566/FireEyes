@@ -16,7 +16,7 @@
             android:layout_centerVertical="true"
              android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:src="@android:drawable/ic_btn_speak_now" />
+            android:src="@drawable/back" />
 
         <TextView
             android:id="@+id/activity_add_area_check_tv"
@@ -61,118 +61,20 @@
             android:textColor="#F00" />
 
         <EditText
+            android:id="@+id/area_name_et_activity_add_area_check"
             style="@style/my_edittext_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp" />       
     </LinearLayout>
 
-    <LinearLayout
+    <ExpandableListView
+        android:id="@+id/activity_add_area_check_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E3F4FE"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/activity_add_area_check_tv_deface"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="1.防火、防烟分区" />
-
-        <CheckBox
-            android:id="@+id/activity_add_area_check_cbox_deface"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#F9F9F9"
-        >
-    <CheckBox
-        android:id="@+id/activity_add_area_check_cbox_item1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="防火、防烟分区符合规范"
-        android:textColor="#5B5B5B"
-        android:layout_marginLeft="15sp"
-        />
-    
-    <TextView 
-        style="@style/my_divide_line"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        />
-    <CheckBox
-        android:id="@+id/activity_add_area_check_cbox_item2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="防火隔墙"
-        android:textColor="#5B5B5B"
-        android:layout_marginLeft="15sp"
-        />
-    </LinearLayout>
-    
-     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#E3F4FE"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="10dp" >
-
-        <TextView
-            android:id="@+id/activity_add_area_check_tv_heat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="15sp"
-            android:text="2.建筑结构的耐火特性" />
-
-        <CheckBox
-            android:id="@+id/activity_add_area_check_cbox_heat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#F9F9F9"
-        >
-    <CheckBox
-        android:id="@+id/activity_add_area_check_cbox_item3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="建筑结构的燃烧特性和耐火极限符合设计要求"
-        android:singleLine="true"
-        android:textColor="#5B5B5B"
-        android:layout_marginLeft="15sp"
-        />
-    
-    <TextView 
-        style="@style/my_divide_line"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="15sp"
-        />
-    <CheckBox
-        android:id="@+id/activity_add_area_check_cbox_item4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="使用性质"
-        android:textColor="#5B5B5B"
-        android:layout_marginLeft="15sp"
-        />
-    </LinearLayout>
-    
-    
+        android:layout_height="match_parent" 
+        android:listSelector="#00000000"
+        android:groupIndicator="@null"
+        android:descendantFocusability="blocksDescendants"/>
 
 </LinearLayout>

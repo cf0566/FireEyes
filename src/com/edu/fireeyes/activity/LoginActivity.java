@@ -151,6 +151,13 @@ public class LoginActivity extends BaseActivity{
 		if(password!=null)etPassword.setText(password);
 		ckBoxAutoLogin.setChecked(autoLogin);
 		
+		// if has logined, go to home page
+		String token=sharedPref.getString("token", null);
+		if(token!=null){
+			Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+			startActivity(intent);
+			finish();
+		}
 		if(autoLogin)attemptLogin();
 	}
 	private void attemptLogin(){
@@ -225,4 +232,15 @@ public class LoginActivity extends BaseActivity{
 			
 		});
 	}	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		SharedPreferences sharedPref=PreferenceManager.getDefaultSharedPreferences(this);
+		String name=sharedPref.getString("name", null);
+		String password=sharedPref.getString("password", null);
+		boolean autoLogin=sharedPref.getBoolean("autologin", false);
+		if(name!=null)etName.setText(name);
+		if(password!=null)etPassword.setText(password);
+		ckBoxAutoLogin.setChecked(autoLogin);
+	}
 }

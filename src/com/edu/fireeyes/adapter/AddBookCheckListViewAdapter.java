@@ -1,5 +1,8 @@
 package com.edu.fireeyes.adapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.edu.fireeyes.R;
 
 import android.content.Context;
@@ -12,25 +15,35 @@ import android.widget.TextView;
 public class AddBookCheckListViewAdapter extends BaseExpandableListAdapter{
 	
 	private Context context;
-	private String [] Title = null;
-	private String [][] Content = null;
+	private List<String> Title = null,selItemIds=null;
+	private ArrayList<ArrayList<ChildItem>> Content = null;
 	
+	public static class ChildItem{
+		public ChildItem(){}
+		public ChildItem(String cId,String cName){
+			this.sub_id=cId;
+			this.sub_name=cName;
+		}
+		public String sub_id;
+		public String sub_name;
+	}
 	public AddBookCheckListViewAdapter(Context context) {
 		this.context = context;
 	}
 	
-	public void setDatas(String [] Title,String [][] Content){
+	public void setDatas(List<String> Title,ArrayList<ArrayList<ChildItem>> Content,List<String> selItemIds){
 		this.Title = Title;
 		this.Content = Content;
+		this.selItemIds=selItemIds;
 	}
 	
 	@Override
 	public int getGroupCount() {
-		return Title.length;
+		return Title.size();
 	}
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		return Content[groupPosition].length;
+		return Content.get(groupPosition).size();
 	}
 	@Override
 	public Object getGroup(int groupPosition) {
@@ -64,7 +77,7 @@ public class AddBookCheckListViewAdapter extends BaseExpandableListAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvTitle.setText(Title[groupPosition]);
+		holder.tvTitle.setText(Title.get(groupPosition));
 		
 		return convertView;
 	}
@@ -80,7 +93,10 @@ public class AddBookCheckListViewAdapter extends BaseExpandableListAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.cBox.setText(Content[groupPosition][childPosition]);
+		ChildItem cItem=Content.get(groupPosition).get(childPosition);
+		holder.cBox.setText(cItem.sub_name);
+		if(selItemIds.contains(cItem.sub_id))holder.cBox.setChecked(true);
+		else holder.cBox.setChecked(false);
 		return convertView;
 	}
 	

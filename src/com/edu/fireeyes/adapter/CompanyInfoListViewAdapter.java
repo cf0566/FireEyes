@@ -7,9 +7,10 @@ import java.util.Map;
 
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.adapter.CompanyBaseInformListViewAdapter.ViewHolder;
-import com.edu.fireeyes.data.TaskInfo.CompanyInfoItem;
+import com.edu.fireeyes.data.InitTaskInfo.CompanyInfoItem;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
@@ -18,8 +19,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class CompanyInfoListViewAdapter extends BaseAdapter {
+	private static final String TAG="XXXCompanyInfoListViewAdapter";
 	private List<CompanyInfoItem> datas = new ArrayList<CompanyInfoItem>();
-	private Map<String,String> infos=new HashMap<String,String>();
+	/**
+	 * info map for info_id and info_value
+	 */
+	private Map<String,String> infos = new HashMap<String,String>();
 	private Context context;
 	
 	
@@ -29,6 +34,9 @@ public class CompanyInfoListViewAdapter extends BaseAdapter {
 	}
 	public void setDatas(List<CompanyInfoItem> datas){
 		this.datas=datas;
+	}
+	public void setInfos(Map<String,String> cInfos){
+		this.infos=cInfos;
 	}
 	public Map<String,String> getInfos(){
 		return this.infos;
@@ -64,7 +72,7 @@ public class CompanyInfoListViewAdapter extends BaseAdapter {
 		}else{
 			holder = (ViewHolder) convertView.getTag();
 		}
-
+		final String infoId=datas.get(position).info_id;
 		holder.tvTitle.setText(datas.get(position).info_name);
 		holder.etContent.setOnFocusChangeListener(new OnFocusChangeListener(){
 
@@ -72,10 +80,14 @@ public class CompanyInfoListViewAdapter extends BaseAdapter {
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO Auto-generated method stub
 				String value=((EditText)v).getText().toString();
-				if(!hasFocus&&!value.isEmpty())infos.put(datas.get(position).info_id,value);
+				if(!hasFocus){infos.put(infoId,value);
+				//Log.d(TAG, "save item "+datas.get(position).info_name);
+				}
 			}
 			
-		});
+		});		
+		if(infos.containsKey(infoId))holder.etContent.setText(infos.get(infoId));
+		else holder.etContent.setText(""); // clear the before template value
 		return convertView;
 	}
 	class ViewHolder{

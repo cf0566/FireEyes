@@ -11,7 +11,15 @@
         android:background="#0E88D5"
         android:gravity="center_vertical"
         android:padding="10dp" >
-
+		<ImageView
+            android:id="@+id/activity_check_created_iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/back" />
         <TextView
             android:id="@+id/activity_check_created_title"
             android:layout_width="wrap_content"
@@ -21,17 +29,6 @@
             android:text="检测项生成"
             android:textColor="#FFF"
             android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/activity_check_created_iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-             android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:src="@drawable/back" />
-
         <ImageView
             android:id="@+id/activity_check_created_iv_help"
             android:layout_width="wrap_content"
@@ -68,10 +65,10 @@
                     android:text="资料检查" />
 
                 <ImageView
-                    android:id="@+id/activity_check_created_check_book"
+                    android:id="@+id/activity_check_created_check_book_drop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/up8"
+                    android:src="@drawable/go8"
                     android:layout_marginLeft="10dp"
                     android:gravity="center_vertical" />
                 
@@ -93,6 +90,8 @@
                 android:id="@+id/activity_check_created_lv_book"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
                 ></com.edu.fireeyes.views.MyListView>
 
             <LinearLayout
@@ -112,7 +111,8 @@
                     android:gravity="center_vertical"
                     android:text="区域检查" />
 
-                   <ImageView
+                <ImageView
+                    android:id="@+id/activity_check_created_check_area_drop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/go8"
@@ -152,6 +152,7 @@
                     android:text="重点部位" />
 
                 <ImageView
+                    android:id="@+id/activity_check_created_check_import_drop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/go8"

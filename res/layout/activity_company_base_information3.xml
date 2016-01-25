@@ -73,13 +73,16 @@
                     android:textColor="#F00"
                     android:textSize="15sp" />
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/activity_com_in3_et_com_name"
                     style="@style/my_edittext_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:paddingLeft="5dp" />
+                <EditText android:id="@+id/et_get_focus"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
             <TextView style="@style/my_divide_line" />

@@ -392,7 +392,7 @@
 	                        android:src="@drawable/open" />
                 	</RelativeLayout>
                 	<RelativeLayout
-                	    android:layout_marginLeft="6dip"
+                	    android:layout_marginLeft="10dip"
 	                    android:layout_width="match_parent"
 	                    android:layout_height="wrap_content" >
 	

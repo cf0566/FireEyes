@@ -86,14 +86,18 @@
         </activity>
         <activity android:name="com.edu.fireeyes.activity.SocialCompanyTaskActivity" >
         </activity>
-        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInform3Activity" >
+        <activity android:name="com.edu.fireeyes.activity.CompanyBaseInfo3Activity" >
         </activity>
         <activity android:name="com.edu.fireeyes.activity.NewBuilderGenenalTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderIndustryTaskActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.NewBuilderTaskChangeActivity"></activity>
     	<activity android:name="com.edu.fireeyes.activity.UsingExplainDetailsActivity"></activity>
+<<<<<<< HEAD
     	<activity android:name="com.edu.fireeyes.activity.SocialDetailsBaseInformationActivity"></activity>
     	
+=======
+    	<activity android:name="com.edu.fireeyes.activity.CheckCreatedActivity2" >  </activity>
+>>>>>>> 226929e32a31a8b93c905242fd0945ad80333f27
     </application>
 
 </manifest>
