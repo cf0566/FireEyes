@@ -10,11 +10,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.edu.fireeyes.R;
-import com.edu.fireeyes.bean.CheckListInfo;
+import com.edu.fireeyes.bean.StandardListChildren;
 
 public class NormalExampleSlidingListViewAdapter extends BaseAdapter {
 
-	private List<String> datas = new ArrayList<String>();
+	private ArrayList<StandardListChildren> datas ;
 	private Context context;
 	
 
@@ -23,7 +23,7 @@ public class NormalExampleSlidingListViewAdapter extends BaseAdapter {
 
 	}
 
-	public void setDatas(List<String> datas) {
+	public void setDatas(ArrayList<StandardListChildren> datas) {
 		this.datas = datas;
 	}
 
@@ -57,7 +57,7 @@ public class NormalExampleSlidingListViewAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvName.setText(datas.get(position));
+		holder.tvName.setText(datas.get(position).getName());
 		return convertView;
 	}
 

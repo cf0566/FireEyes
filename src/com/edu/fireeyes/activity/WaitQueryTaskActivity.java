@@ -2,7 +2,10 @@ package com.edu.fireeyes.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.json.JSONException;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +19,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -70,7 +72,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 	ArrayList<WaitQueryTaskItems> items;//页面跳转的item项获取
 	private HttpUtils post;
 	private RequestParams params;
-	private SharedPreferences sp;
+	private SharedPreferences sp , spSubmit;
 	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
@@ -124,7 +126,27 @@ public class WaitQueryTaskActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				showShortToast("提交");
+				spSubmit = getSharedPreferences("saveTasks", MODE_PRIVATE);
+				Map<String, ?> map = spSubmit.getAll();
+				List<String> list = new ArrayList<String>();
+				 for(Map.Entry<String, ?>  entry : map.entrySet()){  
+//		             content += (entry.getKey()+entry.getValue());  
+					 list.add(entry.getValue().toString());
+					 
+		         }  
+				 org.json.JSONObject object = new org.json.JSONObject();
+				 org.json.JSONArray array = new org.json.JSONArray();
+				for (int i = 0; i < list.size(); i++) {
+					try {
+						array.put(list.get(i));
+						object.put("total_tasks", array);
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				String result = object.toString();
+				showShortToast(result);
+				Log.i("oye", result);
 			}
 		});
 		
@@ -154,7 +176,6 @@ public class WaitQueryTaskActivity extends BaseActivity {
 				intent.putExtra("solution_tag", position+"");
 				startActivity(intent);
 //				showShortToast(rGroup.getCheckedRadioButtonId()+""+"------"+position+"");
-				
 			}
 		});
 		
@@ -170,7 +191,7 @@ public class WaitQueryTaskActivity extends BaseActivity {
 	}
 
 	private void loadrBtnCount() {
-		  post = new HttpUtils();
+			post = new HttpUtils();
 	        
 	        post.configCurrentHttpCacheExpiry(10*1000);
 	         /*

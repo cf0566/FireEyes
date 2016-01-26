@@ -1,6 +1,10 @@
 package com.edu.fireeyes.adapter;
 
+import java.util.ArrayList;
+
 import com.edu.fireeyes.R;
+import com.edu.fireeyes.bean.StandardListChildren;
+import com.edu.fireeyes.bean.StandardListData;
 
 import android.content.Context;
 import android.view.View;
@@ -13,25 +17,25 @@ import android.widget.TextView;
 public class UsingExplainELVAdapter extends BaseExpandableListAdapter{
 	
 	private Context context;
-	private String [] Title = null;
-	private String [][] Content = null;
+	private ArrayList<StandardListData> titleList = null;
+	private ArrayList<StandardListChildren> contentList = null;
 	
 	public UsingExplainELVAdapter(Context context) {
 		this.context = context;
 	}
 	
-	public void setDatas(String [] Title,String [][] Content){
-		this.Title = Title;
-		this.Content = Content;
+	public void setDatas(ArrayList<StandardListData> Title , ArrayList<StandardListChildren> Content){
+		this.titleList = Title;
+		this.contentList = Content;
 	}
 	
 	@Override
 	public int getGroupCount() {
-		return Title.length;
+		return titleList == null ? 0 :titleList.size();
 	}
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		return Content[groupPosition].length;
+		return contentList.size();
 	}
 	@Override
 	public Object getGroup(int groupPosition) {
@@ -65,7 +69,7 @@ public class UsingExplainELVAdapter extends BaseExpandableListAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvTitle.setText(Title[groupPosition]);
+		holder.tvTitle.setText(titleList.get(groupPosition).getName());
 		
 		return convertView;
 	}
@@ -81,7 +85,7 @@ public class UsingExplainELVAdapter extends BaseExpandableListAdapter{
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tvContent.setText(Content[groupPosition][childPosition]);
+		holder.tvContent.setText(contentList.get(childPosition).getName());
 		return convertView;
 	}
 	

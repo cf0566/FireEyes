@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
@@ -50,15 +51,22 @@ public class SocialCompanyActivity extends BaseActivity{
 	private SharedPreferences sp;
 	private EditText etSearch;
 	private Dialog progressDialog;
+	private ImageView ivHelp;
 	
-	private PopupWindow pw;
-	private int screenWidth;
+	private ArrayList<Integer> ivList = new ArrayList<Integer>();
+	private int screenWidth,screenHight;
+	private int index = 0;
+	private PopupWindow popupwindow;
+	
+	private PopupWindow pw1;
+	
 	@Override
 	protected void getIntentData(Bundle savedInstanceState) {
 		DisplayMetrics metrics = new DisplayMetrics();
 		SocialCompanyActivity.this.getWindowManager().getDefaultDisplay()
 				.getMetrics(metrics);
 		screenWidth = metrics.widthPixels;
+		screenHight = metrics.heightPixels;
 	}
 
 	@Override
@@ -74,7 +82,7 @@ public class SocialCompanyActivity extends BaseActivity{
 		ivBack = (ImageView) findViewById(R.id.activity_social_back);
 		etSearch = (EditText) findViewById(R.id.activity_social_et_search);
 		progressDialog=ProgressDialogHandle.getProgressDialog(this, null);
-		
+		ivHelp = (ImageView) findViewById(R.id.activity_social_help);
 	}
 
 	@Override
@@ -117,8 +125,43 @@ public class SocialCompanyActivity extends BaseActivity{
 				showPopupWindow();
 			}
 		});
-	}
+		ivHelp.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				View view = View.inflate(SocialCompanyActivity.this, R.layout.help_popupwindow, null);
+				final ImageView ivIcon = (ImageView) view.findViewById(R.id.help_iv);
+				ImageView ivDelete = (ImageView) view.findViewById(R.id.help_delete);
+				popupwindow = new PopupWindow(view, screenWidth, screenHight);
+				popupwindow.setFocusable(true);
+				ivIcon.setImageResource(ivList.get(index));
+				
+				ivIcon.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if (ivList.size()-1 > index) {
+							index++;
+							ivIcon.setImageResource(ivList.get(index));
+						}else{
+							popupwindow.dismiss();
+							index = 0;
+						}
+					}
+				});
+				popupwindow.showAtLocation(v, Gravity.BOTTOM|
+						Gravity.CENTER_HORIZONTAL, 0, 0);
+				ivDelete.setOnClickListener(new OnClickListener() {
 
+					@Override
+					public void onClick(View v) {
+						popupwindow.dismiss();
+					}
+				});
+			}
+		});
+	}
+	
 	@Override
 	protected void initData() {
 		// TODO Auto-generated method stub
@@ -127,7 +170,8 @@ public class SocialCompanyActivity extends BaseActivity{
 		lvCompanyName.setAdapter(adapter);
 		
 		loadListView();
-		
+		ivList.add(R.drawable.social1);
+		ivList.add(R.drawable.social2);
 	}
 
 	/**
@@ -139,7 +183,6 @@ public class SocialCompanyActivity extends BaseActivity{
          * */
         post = new HttpUtils();
         post.configCurrentHttpCacheExpiry(10*1000);
-        
          /*
          * 第二步：通过send方法开始本次网络请求
          * */
@@ -185,7 +228,7 @@ public class SocialCompanyActivity extends BaseActivity{
 		}
 		lvSelectArea.setAdapter(adapter);
 		
-		pw = new PopupWindow(view, screenWidth/2, LayoutParams.WRAP_CONTENT);
+		pw1 = new PopupWindow(view, screenWidth/2, LayoutParams.WRAP_CONTENT);
 //		pw.setFocusable(true);
 		
 		WindowManager.LayoutParams params = SocialCompanyActivity.this.getWindow()
@@ -193,12 +236,12 @@ public class SocialCompanyActivity extends BaseActivity{
 		params.alpha = 1f;
 		SocialCompanyActivity.this.getWindow().setAttributes(params);
 
-		pw.setBackgroundDrawable(new ColorDrawable());
-		pw.setOutsideTouchable(true);
+		pw1.setBackgroundDrawable(new ColorDrawable());
+		pw1.setOutsideTouchable(true);
 		
-		pw.showAsDropDown(etSearch);
+		pw1.showAsDropDown(etSearch);
 		
-		pw.setOnDismissListener(new OnDismissListener() {
+		pw1.setOnDismissListener(new OnDismissListener() {
 			
 			@Override
 			public void onDismiss() {
@@ -215,7 +258,7 @@ public class SocialCompanyActivity extends BaseActivity{
 					int position, long id) {
 //				Toast.makeText(AddImportCheckActivity.this, adapter.getItem(position), 0).show();
 				etSearch.setText(adapter.getItem(position));
-				pw.dismiss();
+				pw1.dismiss();
 			}
 		});
 	}

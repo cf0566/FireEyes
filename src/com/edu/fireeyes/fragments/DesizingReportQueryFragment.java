@@ -36,6 +36,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.fireeyes.R;
 import com.edu.fireeyes.activity.RemarkActivity;
@@ -59,23 +60,22 @@ public class DesizingReportQueryFragment extends Fragment {
 
 	private final static int REMARK_CODE = 0;
 	private int index = 0;
-	private RadioButton rbtn;
 	private int rbtn_state = 0;
 	private List<String> item_id_count = new ArrayList<String>();
-	private HashMap<Integer, String> map;
+	// private HashMap<Integer, String> map;
 	private ArrayList<SaveWaitQueryTask> saveList;
 	private SaveWaitQueryTask saveTasks;
 	private String relateId;
 
-	private SharedPreferences sp;
+	private SharedPreferences sp, sp1;
 
 	private String uri, content;// 备注页面返回过来的图片地址已经内容
 
+	private ArrayList<RadioGroup> rgroupList = new ArrayList<RadioGroup>(); ;//单选框的集合
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_desizing_report_query,
-				null);
+		View view = inflater.inflate(R.layout.fragment_desizing_report_query,null);
 		initView(view);
 		loadListView();
 		initData();
@@ -86,9 +86,8 @@ public class DesizingReportQueryFragment extends Fragment {
 
 	private void initData() {
 		task_id = getActivity().getIntent().getStringExtra("task_id");// 任务的名称
-		
-	}
 
+	}
 
 	private void initView(View view) {
 		lv = (ListView) view
@@ -127,8 +126,9 @@ public class DesizingReportQueryFragment extends Fragment {
 
 	private void registerListener() {
 
-		
-		
+		/**
+		 * 保存按钮监听
+		 */
 		btnSave.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -137,11 +137,12 @@ public class DesizingReportQueryFragment extends Fragment {
 				saveList = new ArrayList<SaveWaitQueryTask>();
 				saveTasks = new SaveWaitQueryTask();
 				for (int i = 0; i < items.size(); i++) {
-						saveList.add(new SaveWaitQueryTask(task_id, task_item_id,
-								task_object_id, items.get(i).getItem_id(),
-								rbtn_state , uri, content));
+					saveList.add(new SaveWaitQueryTask(task_id, task_item_id,
+							task_object_id, items.get(i).getItem_id(),
+							rbtn_state, uri, content));
+//					Log.i("oye", items.get(i).getItem_id()+"------"+rbtn_state);
 				}
-				Log.i("oye", TasktoJson(saveTasks));
+				
 				sp = getActivity().getSharedPreferences("saveTasks",getActivity().MODE_PRIVATE);
 				Editor editor = sp.edit();
 				editor.putString(task_id + task_item_id + task_object_id,TasktoJson(saveTasks));
@@ -155,18 +156,21 @@ public class DesizingReportQueryFragment extends Fragment {
 	}
 
 	public String TasktoJson(SaveWaitQueryTask tasks) {
+		
+		
 		String jsonresult = "";
 		JSONObject object = new JSONObject();
 		JSONArray array = new JSONArray();
 		for (int i = 0; i < saveList.size(); i++) {
+			String rbtn_status = sp1.getString(task_id + task_item_id + task_object_id +items.get(i).getItem_id()+index+"", "");
+//			Log.i("oye", rbtn_status);
 			JSONObject petobj = new JSONObject();
 			try {
 				petobj.put("task_id", saveList.get(i).getTask_id());
 				petobj.put("task_item_id", saveList.get(i).getTask_item_id());
-				petobj.put("task_object_id", saveList.get(i)
-						.getTask_object_id());
+				petobj.put("task_object_id", saveList.get(i).getTask_object_id());
 				petobj.put("item_id", saveList.get(i).getItem_id());
-				petobj.put("rbtn_state", saveList.get(i).getRbtn_state());
+				petobj.put("rbtn_state", rbtn_status);
 				petobj.put("pic_uri", saveList.get(i).getPic_uri());
 				petobj.put("content", saveList.get(i).getContent());
 				array.put(petobj);
@@ -188,12 +192,13 @@ public class DesizingReportQueryFragment extends Fragment {
 		if (requestCode == REMARK_CODE && resultCode == Activity.RESULT_OK) {
 			uri = data.getStringExtra("uri");
 			content = data.getStringExtra("content");
-			Log.i("oye", uri+content);
+			Log.i("oye", uri + content);
 		}
 	}
-	
+
 	/**
 	 * 适配器设置
+	 * 
 	 * @author MBENBEN
 	 *
 	 */
@@ -203,7 +208,6 @@ public class DesizingReportQueryFragment extends Fragment {
 		private ArrayList<WaitQueryTaskItems> datas;
 		private Context context;
 		private String item_id;
-		ArrayList<String> rbtnList = new ArrayList<String>();
 
 		public DesizingReportQueryAdapter(Context context) {
 			this.context = context;
@@ -239,8 +243,7 @@ public class DesizingReportQueryFragment extends Fragment {
 				ViewGroup parent) {
 			final ViewHolder holder;
 			if (convertView == null) {
-				convertView = View.inflate(context,
-						R.layout.item_wait_task_listview_click, null);
+				convertView = View.inflate(context,R.layout.item_wait_task_listview_click, null);
 				holder = new ViewHolder();
 				holder.ivAdd = (ImageView) convertView
 						.findViewById(R.id.item_wait_task_listview_click_iv_add);
@@ -254,8 +257,8 @@ public class DesizingReportQueryFragment extends Fragment {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			holder.tvContent.setText(datas.get(position).getName());
-			
-			addView(holder,position);
+
+			addView(holder, position);
 
 			/**
 			 * 添加项
@@ -264,7 +267,8 @@ public class DesizingReportQueryFragment extends Fragment {
 
 				@Override
 				public void onClick(View v) {
-					addView(holder,position);
+					index++;
+					addView(holder, position);
 				}
 
 			});
@@ -272,14 +276,20 @@ public class DesizingReportQueryFragment extends Fragment {
 			return convertView;
 		}
 
-		private void addView(final ViewHolder holder,final int position) {
+		private void addView(final ViewHolder holder, final int position) {
 			final RelativeLayout relate = new RelativeLayout(getActivity());
+			item_id = items.get(position).getItem_id();
+			sp1 = getActivity().getSharedPreferences("rgroup_status",getActivity().MODE_PRIVATE);
+
+			
 			relate.setGravity(Gravity.CENTER_VERTICAL);
 			relate.setBackgroundColor(Color.parseColor("#F9F9F9"));
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			final RadioGroup rgroup = new RadioGroup(getActivity());
-			rgroup.setTag(index + "");
+			RadioButton rbtn;
+
+			rgroup.setTag(item_id+index);
 			relate.setId(index);
 			LayoutParams param1 = new LayoutParams(LayoutParams.WRAP_CONTENT,
 					LayoutParams.WRAP_CONTENT);
@@ -293,6 +303,7 @@ public class DesizingReportQueryFragment extends Fragment {
 			for (int i = 0; i < list.size(); i++) {
 				rbtn = new RadioButton(getActivity());
 				rbtn.setId(i);
+				rbtn.setTag(i);
 				rbtn.setText(list.get(i));
 				rbtn.setTextSize(12);
 				rbtn.setPadding(0, 0, 20, 0);
@@ -324,11 +335,13 @@ public class DesizingReportQueryFragment extends Fragment {
 			param2.addRule(RelativeLayout.LEFT_OF, 3);// 此控件在id为1的控件的右边
 			relate.addView(btnTis, param2);
 			holder.parentll.addView(relate, params);
+			rgroupList.add(rgroup);
 
 			btnDel.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					holder.parentll.removeView((View) v.getParent());
+					index--;
 				}
 			});
 
@@ -336,30 +349,39 @@ public class DesizingReportQueryFragment extends Fragment {
 
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					rbtn_state = checkedId ;
-					map = new HashMap<Integer, String>();
-					map.put(relate.getId(), checkedId + "");
+					rbtn_state = checkedId;
 					relateId = relate.getId() + "";
-					// Toast.makeText(getActivity(),relate.getId() + "" + "---"
-					// +map.get(relate.getId()), 0).show();
 
+					Editor editor = sp1.edit();
+					editor.putString(task_id + task_item_id + task_object_id +rgroup.getTag().toString(), rbtn_state + "");
+					editor.commit();
+					// Toast.makeText(getActivity(),relate.getId() +""+ "---"
+					// +map.get(relate.getId()), 0).show();
 				}
 			});
+
+			String id = sp1.getString(task_id + task_item_id + task_object_id +rgroup.getTag().toString(), "");
+			for (int i = 0; i < rgroupList.size(); i++) {
+				
+				if (id == "") {
+					((RadioButton) rgroup.getChildAt(0)).setChecked(true);
+				} else if (sp1 != null && id != null && rgroup.getTag().equals(item_id+index+"")){
+					int id1 = Integer.parseInt(id);
+					((RadioButton) rgroup.getChildAt(id1)).setChecked(true);
+//					Log.i("oye", id + "-----" + item_id);
+				}
+			}
 
 			btnTis.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					item_id = items.get(position).getItem_id();
 					item_id_count.add(item_id);
-					Intent intent = new Intent(getActivity(),
-							RemarkActivity.class);
-					intent.putExtra("pic_name", task_id + task_item_id
-							+ task_object_id + item_id);
+					Intent intent = new Intent(getActivity(),RemarkActivity.class);
+					intent.putExtra("pic_name", task_id + task_item_id + task_object_id + item_id);
 					startActivityForResult(intent, REMARK_CODE);
 				}
 			});
 		}
-
 		class ViewHolder {
 			ImageView ivAdd;
 			TextView tvContent;

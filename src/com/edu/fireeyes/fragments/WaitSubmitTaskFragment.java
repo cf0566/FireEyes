@@ -101,10 +101,16 @@ public class WaitSubmitTaskFragment extends Fragment{
 			@Override
 			public void onSuccess(ResponseInfo<String> arg0) {
 				String result = arg0.result;
-				TaskListData obj = JSONObject.parseObject(result, TaskList.class).getData();
-				ArrayList<UnSubmitTaskListInfo> info = obj.getUnSubmitTasks();
-				adapter.setDatas(info);
-				adapter.notifyDataSetChanged();
+				
+				String code = JSONObject.parseObject(result, TaskList.class).getCode();
+				if ("0".equals(code)) {
+					Toast.makeText(getActivity(), "服务器内部故障", 0).show();
+				}else{
+					TaskListData obj = JSONObject.parseObject(result, TaskList.class).getData();
+					ArrayList<UnSubmitTaskListInfo> info = obj.getUnSubmitTasks();
+					adapter.setDatas(info);
+					adapter.notifyDataSetChanged();
+				}
 			}
 		});
 	}

@@ -38,111 +38,123 @@ import com.lidroid.xutils.http.client.HttpRequest.HttpMethod;
 
 /**
  * 重新查勘任务模块
+ * 
  * @author MBENBEN
  *
  */
-public class RequeryTaskFragment extends Fragment{
-	
-	//数据列表
+public class RequeryTaskFragment extends Fragment {
+
+	// 数据列表
 	private ListView lv;
-	//适配器
+	// 适配器
 	private ReQueryTaskListViewAdapter adapter;
-	//数据源
+	// 数据源
 	ArrayList<ReCheckListInfo> info;
-	//跳转
+	// 跳转
 	private Intent intent;
 	private HttpUtils post;
 	private RequestParams params;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.fragment_wait_requery_task, null);
-		
+
 		initView(v);
-		
+
 		initDatas();
-		
+
 		loadListView();
-		
+
 		registerListener();
-		
+
 		return v;
 	}
 
 	private void loadListView() {
 		/*
-         *  第一步：创建网络请求对象
-         * */
-        post = new HttpUtils();
-        post.configCurrentHttpCacheExpiry(10*1000);
-        
-         /*
-         * 第二步：通过send方法开始本次网络请求
-         * */
-         params = new RequestParams();
-         params.addBodyParameter("a", "getTaskList");
-         params.addBodyParameter("token", "");
-         post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL,params, new RequestCallBack<String>() {
+		 * 第一步：创建网络请求对象
+		 */
+		post = new HttpUtils();
+		post.configCurrentHttpCacheExpiry(10 * 1000);
 
-			@Override
-			public void onFailure(
-					com.lidroid.xutils.exception.HttpException arg0,
-					String arg1) {
-				Toast.makeText(getActivity(), "请检查网络状况", 0).show();
-			}
+		/*
+		 * 第二步：通过send方法开始本次网络请求
+		 */
+		params = new RequestParams();
+		params.addBodyParameter("a", "getTaskList");
+		params.addBodyParameter("token", "");
+		post.send(HttpMethod.POST, UrlUtils.FIRE_EYES_URL, params,
+				new RequestCallBack<String>() {
 
-			@Override
-			public void onSuccess(ResponseInfo<String> arg0) {
-				String result = arg0.result;
-				TaskListData obj = JSONObject.parseObject(result, TaskList.class).getData();
-				info = obj.getReCheckList();
-				adapter.setDatas(info);
-				adapter.notifyDataSetChanged();
-			}
-		});
+					@Override
+					public void onFailure(
+							com.lidroid.xutils.exception.HttpException arg0,
+							String arg1) {
+						Toast.makeText(getActivity(), "请检查网络状况", 0).show();
+					}
+
+					@Override
+					public void onSuccess(ResponseInfo<String> arg0) {
+						String result = arg0.result;
+						String code = JSONObject.parseObject(result,TaskList.class).getCode();
+						if ("0".equals(code)) {
+							Toast.makeText(getActivity(), "服务器内部故障", 0).show();
+						} else {
+							TaskListData obj = JSONObject.parseObject(result,TaskList.class).getData();
+							info = obj.getReCheckList();
+							adapter.setDatas(info);
+							adapter.notifyDataSetChanged();
+						}
+					}
+				});
 	}
 
 	/**
 	 * 监听弹出dialog
 	 */
 	private void registerListener() {
-		
+
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
+
 				String notPass = info.get(position).getTask_reason();
-//				Log.i("oye", notPass+"");
-				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				// Log.i("oye", notPass+"");
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						getActivity());
 				if (notPass == null) {
 					notPass = "没有理由，传过来的是空";
 				}
-				String [] reason = {notPass};
-				
+				String[] reason = { notPass };
+
 				builder.setTitle("不通过原因的文字描述");
 				builder.setItems(reason, new DialogInterface.OnClickListener() {
-					
+
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
 					}
 				});
-				
-				builder.setPositiveButton("重新查勘任务", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						intent = new Intent(getActivity(), WaitQueryTaskActivity.class);
-						intent.putExtra("task_id", 102+"");
-						startActivity(intent);
-						dialog.dismiss();
-					}
-				});
+
+				builder.setPositiveButton("重新查勘任务",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								intent = new Intent(getActivity(),
+										WaitQueryTaskActivity.class);
+								intent.putExtra("task_id", 102 + "");
+								startActivity(intent);
+								dialog.dismiss();
+							}
+						});
 				builder.show();
 			}
-			
+
 		});
 	}
 
@@ -155,5 +167,5 @@ public class RequeryTaskFragment extends Fragment{
 	private void initView(View v) {
 		lv = (ListView) v.findViewById(R.id.fragment_wait_requery_task_lv);
 	}
-	
+
 }

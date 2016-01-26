@@ -6,35 +6,36 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.ImageReader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
+import android.widget.PopupWindow.OnDismissListener;
 
 import com.alibaba.fastjson.JSONObject;
 import com.edu.fireeyes.R;
-import com.edu.fireeyes.activity.LoginActivity;
 import com.edu.fireeyes.activity.MainActivity;
 import com.edu.fireeyes.activity.NormalExampleActivity;
 import com.edu.fireeyes.activity.SocialCompanyActivity;
 import com.edu.fireeyes.activity.UsingExplainActivity;
 import com.edu.fireeyes.adapter.HomePageGridviewAdapter;
-import com.edu.fireeyes.bean.CheckListInfo;
 import com.edu.fireeyes.bean.HomePageAd;
 import com.edu.fireeyes.bean.HomePageAdInfo;
 import com.edu.fireeyes.bean.HomePageAdList;
-import com.edu.fireeyes.bean.TaskList;
-import com.edu.fireeyes.bean.TaskListData;
 import com.edu.fireeyes.utils.UrlUtils;
 import com.gc.flashview.FlashView;
-import com.gc.flashview.listener.FlashViewListener;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -58,18 +59,31 @@ public class HomePageFragment extends Fragment {
 	private Intent intent;
 	private HttpUtils post;
 	private RequestParams params;
+	private ImageView ivHelp;
 
+	private ArrayList<Integer> ivList = new ArrayList<Integer>();
+	private int screenWidth,screenHight;
+	private int index = 0;
+	private PopupWindow popupwindow;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_homepage, null);
 		initViews(view);
 
+		DisplayMetrics metrics = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		screenWidth = metrics.widthPixels;
+		screenHight = metrics.heightPixels;
+		
+		
 		initDatas();
 
 		loadViewPager();
 
 		registerListener();
+		
 
 		return view;
 	}
@@ -142,7 +156,47 @@ public class HomePageFragment extends Fragment {
 			}
 
 		});
+		
+		ivHelp.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+			
+				View view = View.inflate(getActivity(), R.layout.help_popupwindow, null);
+				final ImageView ivIcon = (ImageView) view.findViewById(R.id.help_iv);
+				ImageView ivDelete = (ImageView) view.findViewById(R.id.help_delete);
+				popupwindow = new PopupWindow(view, screenWidth, screenHight);
+				popupwindow.setFocusable(true);
+				ivIcon.setImageResource(ivList.get(index));
+				
+				ivIcon.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if (ivList.size()-1 > index) {
+							index++;
+							ivIcon.setImageResource(ivList.get(index));
+						}else{
+							popupwindow.dismiss();
+							index = 0;
+						}
+						
+					}
+				});
+				popupwindow.showAtLocation(v, Gravity.BOTTOM|
+						Gravity.CENTER_HORIZONTAL, 0, 0);
+				ivDelete.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						popupwindow.dismiss();
+					}
+				});
+			}
+
+		});
 	}
+	
 
 	private void initDatas() {
 		String str[] = { "新建任务", "查勘任务", "历史记录", "社会单位", "使用说明", "标准规范",
@@ -153,11 +207,24 @@ public class HomePageFragment extends Fragment {
 		adapter = new HomePageGridviewAdapter(getActivity());
 		adapter.setDatas(data);
 		gv.setAdapter(adapter);
+		
+		//图片集的数据源
+		ivList.add(R.drawable.home1);
+		ivList.add(R.drawable.home2);
+		ivList.add(R.drawable.home3);
+		ivList.add(R.drawable.home4);
+		ivList.add(R.drawable.home5);
+		ivList.add(R.drawable.home6);
+		ivList.add(R.drawable.home7);
+		ivList.add(R.drawable.home8);
+		ivList.add(R.drawable.home9);
+		
 	}
 
 	private void initViews(View view) {
 		flv = (FlashView) view.findViewById(R.id.fragment_homepage_flashview);
 		gv = (GridView) view.findViewById(R.id.fragment_homepage_gridview);
+		ivHelp = (ImageView)view.findViewById(R.id.activity_main_help);
 	}
 
 	private void loadViewPager() {

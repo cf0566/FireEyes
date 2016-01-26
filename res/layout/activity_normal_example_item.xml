@@ -34,39 +34,22 @@
                 android:text="标准规范"
                 android:textColor="#FFF"
                 android:textSize="20sp" />
-            <TextView 
-                 android:id="@+id/activity_normal_example_tv_item_menu"
+
+            <TextView
+                android:id="@+id/activity_normal_example_tv_item_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="菜单"
                 android:textColor="#FFF"
-                android:textSize="18sp"
-                />
-            
-            
+                android:textSize="18sp" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/activity_normal_example_item_tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_normal_example_item_action"
-            android:layout_margin="15dp"
-            android:text="总则"
-            android:textColor="#307EAC"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/activity_normal_example_item_tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_normal_example_item_tv_name"
-            android:layout_margin="15dp"
-            android:text="内容"
-            android:textSize="15sp" />
-
+        <WebView
+            android:id="@+id/activity_normal_example_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -77,7 +60,6 @@
         android:background="#000"
         android:clickable="true" >
 
-        
         <TextView
             android:id="@+id/activity_normal_example_item_menu_tv_title"
             android:layout_width="wrap_content"
