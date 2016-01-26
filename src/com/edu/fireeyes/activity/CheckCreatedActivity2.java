@@ -246,8 +246,8 @@ public class CheckCreatedActivity2 extends BaseActivity {
 				}catch(Exception e){
 					e.printStackTrace();
 				}				
-				if(checkInfo==null){
-					showShortToast("加载失败，请重试");
+				if(checkInfo==null||checkInfo.code==0){
+					showShortToast("资料检查项,解析失败");
 				}else{
 					for(Solution solu:checkInfo.data){
 						for(SolutionChildItem item:solu.children){
@@ -290,8 +290,8 @@ public class CheckCreatedActivity2 extends BaseActivity {
 				}catch(Exception e){
 					e.printStackTrace();
 				}				
-				if(checkArea==null){
-					showShortToast("加载失败，请重试");
+				if(checkArea==null||checkArea.code==0){
+					showShortToast("区域检查项,解析失败");
 				}
 			}
 			
@@ -329,7 +329,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 					e.printStackTrace();
 				}				
 				if(checkInfo==null){
-					showShortToast("加载失败，请重试");
+					showShortToast("重点部位检查项,解析失败");
 				}else{
 					for(Solution solu:checkInfo.data){
 						for(SolutionChildItem item:solu.children){
@@ -376,7 +376,7 @@ public class CheckCreatedActivity2 extends BaseActivity {
 				}catch(Exception e){
 					e.printStackTrace();
 				}				
-				if(checkUnit==null){
+				if(checkUnit==null||checkUnit.code==0){
 					showShortToast("加载失败，请重试");
 				}else{
 					/**

@@ -13,9 +13,14 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -48,7 +53,14 @@ public class NewBuildFragment extends Fragment{
 	private int destIndex=0,industryIndex=0,memberNum=0;
 	private File pic1=null,pic2=null;
 	private String companyName=null;
-	
+	private ImageView ivHelp;
+	private ArrayList<Integer> ivList=null,
+			ivListNew=new ArrayList<Integer>(),
+			ivListGeneral=new ArrayList<Integer>(),
+			ivListIndustry=new ArrayList<Integer>();
+	private int screenWidth,screenHight;
+	private int index = 0;
+	private PopupWindow popupwindow;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -68,7 +80,25 @@ public class NewBuildFragment extends Fragment{
 		trans = fm.beginTransaction();
 		trans.replace(R.id.newbuild_task_framelayout, new NewBuildTaskfragment());
 		trans.commit();		
+		ivList=ivListNew;
 		initTask();
+		
+		DisplayMetrics metrics = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay()
+				.getMetrics(metrics);
+		screenWidth = metrics.widthPixels;
+		screenHight = metrics.heightPixels;
+		//图片集的数据源
+		ivListNew.add(R.drawable.new_new1);
+		ivListNew.add(R.drawable.new_new2);
+		ivListNew.add(R.drawable.new_new3);
+		ivListGeneral.add(R.drawable.new_general1);
+		ivListGeneral.add(R.drawable.new_general2);
+		ivListGeneral.add(R.drawable.new_general3);
+		ivListIndustry.add(R.drawable.new_industry1);
+		ivListIndustry.add(R.drawable.new_industry2);
+		ivListIndustry.add(R.drawable.new_industry3);
+		ivListIndustry.add(R.drawable.new_industry4);
 	}
 
 	private void registerListener() {
@@ -82,24 +112,65 @@ public class NewBuildFragment extends Fragment{
 					trans = fm.beginTransaction();
 					trans.replace(R.id.newbuild_task_framelayout, new NewBuildTaskfragment());
 					trans.commit();
+					ivList=ivListNew;
 					break;
 				case R.id.newbuild_task_rbtn_genenal:
 					fm = getChildFragmentManager();
 					trans = fm.beginTransaction();
 					trans.replace(R.id.newbuild_task_framelayout, new NewBuildGeneralfragment());
 					trans.commit();
+					ivList=ivListGeneral;
 					break;
 				case R.id.newbuild_task_rbtn_industry:
 					fm = getChildFragmentManager();
 					trans = fm.beginTransaction();
 					trans.replace(R.id.newbuild_task_framelayout, new NewBuildIndustryfragment2());
 					trans.commit();
+					ivList=ivListIndustry;
 					break;
 
 				default:
 					break;
 				}
 			}
+		});
+		ivHelp.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				View view = View.inflate(getActivity(), R.layout.help_popupwindow, null);
+				final ImageView ivIcon = (ImageView) view.findViewById(R.id.help_iv);
+				ImageView ivDelete = (ImageView) view.findViewById(R.id.help_delete);
+				popupwindow = new PopupWindow(view, screenWidth, screenHight);
+				popupwindow.setFocusable(true);
+				ivIcon.setImageResource(ivList.get(index));
+				
+				ivIcon.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						if (ivList.size()-1 > index) {
+							index++;
+							ivIcon.setImageResource(ivList.get(index));
+						}else{
+							popupwindow.dismiss();
+							index = 0;
+						}
+						
+					}
+				});
+				popupwindow.showAtLocation(v, Gravity.BOTTOM|
+						Gravity.CENTER_HORIZONTAL, 0, 0);
+				ivDelete.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						popupwindow.dismiss();
+					}
+				});
+			}
+			
 		});
 	}
 
@@ -108,6 +179,7 @@ public class NewBuildFragment extends Fragment{
 		rBtnNew = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_new);
 		rBtnGenenal = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_genenal);
 		rBtnIndustry = (RadioButton) view.findViewById(R.id.newbuild_task_rbtn_industry);
+		ivHelp=(ImageView) view.findViewById(R.id.activity_main_help);
 		progressDialog=ProgressDialogHandle.getProgressDialog(getActivity(), null);
 	}
 	

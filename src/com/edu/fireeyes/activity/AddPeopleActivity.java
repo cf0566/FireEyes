@@ -160,7 +160,7 @@ public class AddPeopleActivity extends BaseActivity{
 				}catch(Exception e){
 					e.printStackTrace();
 				}				
-				if(taskMembers==null){
+				if(taskMembers==null||taskMembers.code==0){
 					Toast.makeText(AddPeopleActivity.this, "加载失败，请重试",Toast.LENGTH_SHORT ).show();
 				}else{
 					data = taskMembers.data;
