@@ -94,10 +94,10 @@
     	<activity android:name="com.edu.fireeyes.activity.UsingExplainDetailsActivity"></activity>
 
     	<activity android:name="com.edu.fireeyes.activity.SocialDetailsBaseInformationActivity"></activity>
-    	
 
     	<activity android:name="com.edu.fireeyes.activity.CheckCreatedActivity2" >  </activity>
-
+    	<activity android:name="com.edu.fireeyes.activity.MyMessageActivity"></activity>
+    	<activity android:name="com.edu.fireeyes.activity.MyMessageDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -24,5 +24,7 @@ public class Constants {
 	public static final String path_getMemberList="getMemberList";
 	public static final String path_getMemberItems="getMemberItems";
 	public static final String path_saveMemberItems="saveMemberItems";
-	
+	// personal center
+	public static final String path_advise="advise";
+	public static final String path_messageList="messageList";
 }
